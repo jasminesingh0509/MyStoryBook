@@ -1,4 +1,4 @@
-INSERT INTO upvotes
+INSERT INTO contributions
   (
   user_id, story_id, text, order_by)
 VALUES
