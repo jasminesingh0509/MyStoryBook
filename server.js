@@ -1,4 +1,3 @@
-// load .env data into process.env
 require('dotenv').config();
 
 // Web server config
@@ -11,10 +10,11 @@ const app = express();
 const morgan = require('morgan');
 
 // PG database client/connection setup
-const { pool } = require('./db/pool-queries/pool-query.js');
+const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 db.connect();
+
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
@@ -50,13 +50,17 @@ app.use('/api/widgets', widgetsRoutes(db));
 app.get('/', (req, res) => {
   res.render('index');
 });
+app.get(`/login/:id`, (req, res) => {
+  //req.session.user_id = req.params.id
+  res.redirect(`/`);
+});
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
 
 app.get('/story', (req, res) => {
-  res.send('sup dude');
+  res.render(`stories`);
 });
 app.get('/story/progress', (req, res) => {
   res.send('baby authentic meggings');
@@ -73,16 +77,14 @@ app.get(`/story/:id`, (req, res) => {
 app.get(`/user/:id`, (req, res) => {
   res.send('samesame');
 });
-app.get(`/login`, (req, res) => {
-  res.send('yep');
-  req.session.user_id = req.params.id;
-  res.redirect(`/`);
+app.post(`/story`, (req, res) => {
+  let test = req.body.story;
+  console.log(test);
 });
 app.post(`/user`, (req, res) => {});
 app.post(`/user/:id`, (req, res) => {});
 app.post(`/story/delete`, (req, res) => {});
 app.post(`/logout`, (req, res) => {});
-//no login page, but login route
 // story
 // put contribution
 // get/story/completed
