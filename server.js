@@ -11,11 +11,10 @@ const app = express();
 const morgan = require('morgan');
 
 // PG database client/connection setup
-const { Pool } = require('pg');
+const { pool } = require('./db/pool-queries/pool-query.js');
 const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 db.connect();
-
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
@@ -68,14 +67,16 @@ app.get(`/story/completed`, (req, res) => {
     `I'm baby authentic meggings officia palo santo schlitz commodo ad letterpress hella af glossier everyday carry before they sold out slow-carb helvetica. Vexillologist banh mi kickstarter freegan celiac la croix, adipisicing esse. Laborum bitters duis leggings photo booth retro chia, forage portland blue bottle glossier. Tumeric slow-carb lorem vaporware retro. Tote bag enamel pin pitchfork hammock small batch man bun whatever pok pok tattooed ipsum.`,
   );
 });
-app.get(`/story/:age`, (req, res) => {
-  res.send('im 12 and what is this?');
-});
 app.get(`/story/:id`, (req, res) => {
   res.send('testing 4');
 });
 app.get(`/user/:id`, (req, res) => {
   res.send('samesame');
+});
+app.get(`/login`, (req, res) => {
+  res.send('yep');
+  req.session.user_id = req.params.id;
+  res.redirect(`/`);
 });
 app.post(`/user`, (req, res) => {});
 app.post(`/user/:id`, (req, res) => {});
@@ -92,4 +93,3 @@ app.post(`/logout`, (req, res) => {});
 // post/user/id
 // post/story/delete
 // post/logout
-//watch funfunfunction for higher order function filter usage
