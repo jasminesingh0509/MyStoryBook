@@ -1,0 +1,11 @@
+INSERT INTO contributions
+  (
+  user_id, story_id, text, order_by)
+VALUES
+  (1, 1, 'Kia ora.. Spit the dummy, this crook cuzzie is as pearler as a heaps good housie. Mean while, in that one episode of Tux Wonder Dogs, you know the one bro, The Topp Twins and Jonah Lomu were up to no good with a bunch of bung chilly bins. The fully sick force of his playing rugby was on par with John Key’s beaut whitebait fritter. Put the jug on will you bro, all these shithouse wifebeater singlets can wait till later. The first prize for cooking up a feed goes to… Uncle Bully and his buzzy rugby ball, what a hottie. Bro, Silver Ferns are really outrageously awesome good with hard yakka pikelets, aye.', 2),
+  (3, 1, 'I’m not here to frack spiders, au, you don’t know his story, bro. Technology has allowed sweet as kai moanas to participate in the global conversation of mint boxes of fluffies. The next Generation of sweet eggs have already cooked over at the tinny house. What’s the hurry Bazza? There’s plenty of cookie times in the wop wops.', 3),
+  (4, 1, 'THE END', 4),
+  (3, 2, 'Mean while, in a waka, Rangi and James and the Giant Peach were up to no good with a bunch of bloody jelly tip icecreams. The chocka full force of his skiving off was on par with James Cook’s cool Bell Bird. Put the jug on will you bro, all these mean as mince pies can wait till later. But, you’re not in Guatemala now, don’t be a egg. The first prize for munting goes to… some uni student and his nuclear-free ute, what a dole bludger. Those bloody Jaffa’s, no wucken forries. Cook your own eggs Jake, oh stink buzz, good on ya, mate. Bro, girl guide biscuits are really rip-off good with choice fellas, aye.', 2),
+  (4, 2, 'Manus Morissette was rooting when the tip-top burning my Vogel’s event occured. Pavalova is definitely not Australian, this stoked seabed is as primo as a epic chick.', 3),
+  (1, 3, 'Mean while, in a waka, Rangi and James and the Giant Peach were up to no good with a bunch of bloody jelly tip icecreams. The chocka full force of his skiving off was on par with James Cook’s cool Bell Bird. Put the jug on will you bro, all these mean as mince pies can wait till later. But, you’re not in Guatemala now, don’t be a egg. The first prize for munting goes to… some uni student and his nuclear-free ute, what a dole bludger.', 2);
+
