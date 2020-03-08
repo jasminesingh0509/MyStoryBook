@@ -60,14 +60,16 @@ app.get('/story', (req, res) => {
   res.send('sup dude');
 });
 app.get('/story/progress', (req, res) => {
-  res.send('testing 1');
+  res.send('baby authentic meggings');
 });
 
 app.get(`/story/completed`, (req, res) => {
-  res.send('testing 2');
+  res.send(
+    `I'm baby authentic meggings officia palo santo schlitz commodo ad letterpress hella af glossier everyday carry before they sold out slow-carb helvetica. Vexillologist banh mi kickstarter freegan celiac la croix, adipisicing esse. Laborum bitters duis leggings photo booth retro chia, forage portland blue bottle glossier. Tumeric slow-carb lorem vaporware retro. Tote bag enamel pin pitchfork hammock small batch man bun whatever pok pok tattooed ipsum.`,
+  );
 });
 app.get(`/story/:age`, (req, res) => {
-  res.send('testing 3');
+  res.send('im 12 and what is this?');
 });
 app.get(`/story/:id`, (req, res) => {
   res.send('testing 4');

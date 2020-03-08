@@ -22,15 +22,3 @@ module.exports = (db) => {
   });
   return router;
 };
-
-//no login page, but login route
-// story
-// put contribution
-// get/story/completed
-//get/story/progress
-//get/story/age
-//get/story/id
-// post/user
-// post/user/id
-// post/story/delete
-// post/logout
