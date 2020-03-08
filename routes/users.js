@@ -6,20 +6,31 @@
  */
 
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 
 module.exports = (db) => {
-  router.get("/", (req, res) => {
-    db.query(`SELECT * FROM users;`)
-      .then(data => {
+  router.get('/', (req, res) => {
+    db
+      .query(`SELECT * FROM users;`)
+      .then((data) => {
         const users = data.rows;
         res.json({ users });
       })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
       });
   });
   return router;
 };
+
+//no login page, but login route
+// story
+// put contribution
+// get/story/completed
+//get/story/progress
+//get/story/age
+//get/story/id
+// post/user
+// post/user/id
+// post/story/delete
+// post/logout
