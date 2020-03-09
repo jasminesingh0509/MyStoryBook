@@ -2,10 +2,12 @@
 
 body {
   background-color: #eee;
+  font-family: 'Sniglet', cursive;
 
   h1 {
     color: #eee;
   }
+
   .bg-secondary {
     background-color: #ffcc00 !important;
   }
@@ -13,4 +15,18 @@ body {
   .bg-primary {
     background-image: url(‘https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSQZWAaG0lRgLDKBgefc4GDjYnBMK_fyF8a1Y1aAhMFbAFGXn0L’) !important;
   }
+}
+
+.mystories {
+  display: flex;
+  background-color: teal;
+  height: 30%;
+  width: 30%;
+}
+
+.friendsstories {
+  display: flex;
+  background-color: blue;
+  height: 30%;
+  width: 30%;
 }
