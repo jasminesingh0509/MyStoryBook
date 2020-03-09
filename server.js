@@ -9,7 +9,7 @@ const sass = require('node-sass-middleware');
 const app = express();
 const morgan = require('morgan');
 const pool = require('../MyStoryBook/db/pool-queries/pool-query');
-const { getStory, browse } = require('../MyStoryBook/db/pool-queries/search-pool');
+const { getStory, browse, read } = require('../MyStoryBook/db/pool-queries/search-pool');
 
 // PG database client/connection setup
 const { Pool } = require('pg');
@@ -49,8 +49,16 @@ app.use('/api/widgets', widgetsRoutes(db));
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
+const users = {};
+const stories = {};
+
 app.get('/', (req, res) => {
-  res.render('index');
+  browse((err, stories) => {
+    if (err) {
+      return res.render(`error`, { err });
+    }
+    res.render('stories', { stories });
+  });
 });
 app.get(`/login/:id`, (req, res) => {
   //req.session.user_id = req.params.id
@@ -62,10 +70,10 @@ app.listen(PORT, () => {
 });
 
 app.get('/story', (req, res) => {
-  res.render(`stories`);
+  res.render(`index`);
 });
 app.get('/story/progress', (req, res) => {
-  res.send('baby authentic meggings');
+  // res.send('baby authentic meggings');
 });
 
 app.get(`/story/completed`, (req, res) => {
@@ -73,20 +81,29 @@ app.get(`/story/completed`, (req, res) => {
     if (err) {
       return res.render(err, { err });
     }
-    let testKeys = Object.keys(stories);
-    console.log(testKeys);
-    console.log(stories[0]['text']);
-    res.render('stories', { stories });
+    // let storyText = stories.map((story) => story.text);
+    //console.log(`stories length ${stories.length}`);
+    //  console.log(stories[0]['text']);
+
+    res.render('stories', { storyText });
   });
 });
 app.get(`/story/:id`, (req, res) => {
-  res.send('testing 4');
+  read(req.params.id, (err, stories) => {
+    if (err) {
+      return res.render('error', { err });
+    }
+    console.log(stories);
+    res.render('stories', { stories });
+  });
+  //res.send('testing 4');
 });
 app.get(`/user/:id`, (req, res) => {
-  res.send('samesame');
+  //res.send('samesame');
 });
 app.post(`/story`, (req, res) => {
   let { story, paragraph } = req.body;
+  console.log(`storytext test in post`);
 });
 app.post(`/user`, (req, res) => {});
 app.post(`/user/:id`, (req, res) => {});

@@ -9,12 +9,24 @@ const browse = (cb) => {
     .catch((err) => cb(err));
 };
 
-const usersWithName = function(name) {
-  return pool
-    .query(`SELECT * FROM users WHERE name = $1`, [ name ])
-    .then((res) => res.rows[0])
-    .catch((err) => console.log(err));
+const read = (id, cb) => {
+  pool
+    .query(`SELECT * FROM stories WHERE id = $1`, [ id ])
+    .then((res) => {
+      cb(null, res.rows[0]);
+    })
+    .catch((err) => cb(err));
 };
+
+const usersWithName = (name, cb) => {
+  pool
+    .query(`SELECT * FROM users WHERE name = $1`, [ name ])
+    .then((res) => {
+      cb(null, res.rows[0]);
+    })
+    .catch((err) => cb(err));
+};
+
 const getStory = function(id) {
   // .text retrives the text from story object
   return pool
@@ -34,7 +46,7 @@ WHERE users.id = $1`,
     )
     .then((res) => res.rows[0]);
 };
-
+getStoryByUser(1);
 const addStory = function(story) {
   return pool.query(
     `INSERT INTO stories
@@ -106,4 +118,5 @@ module.exports = {
   addStory,
   usersWithName,
   browse,
+  read,
 };
