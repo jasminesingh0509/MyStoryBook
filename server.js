@@ -75,7 +75,7 @@ app.get(`/story/completed`, (req, res) => {
     }
     let testKeys = Object.keys(stories);
     console.log(testKeys);
-    console.log(stories);
+    console.log(stories[0]['text']);
     res.render('stories', { stories });
   });
 });
