@@ -68,7 +68,7 @@ app.get('/story/progress', (req, res) => {
 
 app.get(`/story/completed`, (req, res) => {
   res.send(
-    `I'm baby authentic meggings officia palo santo schlitz commodo ad letterpress hella af glossier everyday carry before they sold out slow-carb helvetica. Vexillologist banh mi kickstarter freegan celiac la croix, adipisicing esse. Laborum bitters duis leggings photo booth retro chia, forage portland blue bottle glossier. Tumeric slow-carb lorem vaporware retro. Tote bag enamel pin pitchfork hammock small batch man bun whatever pok pok tattooed ipsum.`,
+    `I'm baby authentic meggings officia palo santo schlitz commodo ad letterpress hella af glossier everyday carry before they sold out slow-carb helvetica. Vexillologist banh mi kickstarter freegan celiac la croix, adipisicing esse. Laborum wge portland blue bottle glossier. Tumeric slow-carb lorem vaporware retro. Tote bag enamel pin pitchfork hammock small batch man bun whatever pok pok tattooed ipsum.`,
   );
 });
 app.get(`/story/:id`, (req, res) => {
@@ -78,8 +78,8 @@ app.get(`/user/:id`, (req, res) => {
   res.send('samesame');
 });
 app.post(`/story`, (req, res) => {
-  let test = req.body.story;
-  console.log(test);
+  let { story, paragraph } = req.body;
+  console.log(story, paragraph);
 });
 app.post(`/user`, (req, res) => {});
 app.post(`/user/:id`, (req, res) => {});
