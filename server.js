@@ -80,7 +80,12 @@ app.get(`/story/completed`, (req, res) => {
   });
 });
 app.get(`/story/:id`, (req, res) => {
-  res.send('testing 4');
+  getStory(req.params.id, (err, stories) => {
+    if (err) {
+      return res.render('error', { err });
+    }
+    res.render('stories', stories);
+  });
 });
 app.get(`/user/:id`, (req, res) => {
   res.send('samesame');

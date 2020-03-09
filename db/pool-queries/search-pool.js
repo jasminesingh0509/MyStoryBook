@@ -15,13 +15,12 @@ const usersWithName = function(name) {
     .then((res) => res.rows[0])
     .catch((err) => console.log(err));
 };
-const getStory = function(id) {
+const getStory = (id, cb) => {
   // .text retrives the text from story object
-  return pool
-    .query(`SELECT * FROM stories WHERE id = $1`, [ id ])
-    .then((res) => res.rows[0].text)
-    .catch((err) => console.log(err));
+  pool.query(`SELECT * FROM stories WHERE id = $1`, [ id ]).then((res) => cb(res.rows[0])).catch((err) => cb(err));
 };
+
+//getStory(2, console.log);
 
 const getStoryByUser = function(id) {
   return pool
