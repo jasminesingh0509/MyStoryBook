@@ -1,4 +1,3 @@
-// load .env data into process.env
 require('dotenv').config();
 
 // Web server config
@@ -51,13 +50,17 @@ app.use('/api/widgets', widgetsRoutes(db));
 app.get('/', (req, res) => {
   res.render('index');
 });
+app.get(`/login/:id`, (req, res) => {
+  //req.session.user_id = req.params.id
+  res.redirect(`/`);
+});
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
 
 app.get('/story', (req, res) => {
-  res.send('sup dude');
+  res.render(`stories`);
 });
 app.get('/story/progress', (req, res) => {
   res.send('baby authentic meggings');
@@ -65,11 +68,8 @@ app.get('/story/progress', (req, res) => {
 
 app.get(`/story/completed`, (req, res) => {
   res.send(
-    `I'm baby authentic meggings officia palo santo schlitz commodo ad letterpress hella af glossier everyday carry before they sold out slow-carb helvetica. Vexillologist banh mi kickstarter freegan celiac la croix, adipisicing esse. Laborum bitters duis leggings photo booth retro chia, forage portland blue bottle glossier. Tumeric slow-carb lorem vaporware retro. Tote bag enamel pin pitchfork hammock small batch man bun whatever pok pok tattooed ipsum.`,
+    `I'm baby authentic meggings officia palo santo schlitz commodo ad letterpress hella af glossier everyday carry before they sold out slow-carb helvetica. Vexillologist banh mi kickstarter freegan celiac la croix, adipisicing esse. Laborum wge portland blue bottle glossier. Tumeric slow-carb lorem vaporware retro. Tote bag enamel pin pitchfork hammock small batch man bun whatever pok pok tattooed ipsum.`,
   );
-});
-app.get(`/story/:age`, (req, res) => {
-  res.send('im 12 and what is this?');
 });
 app.get(`/story/:id`, (req, res) => {
   res.send('testing 4');
@@ -77,11 +77,14 @@ app.get(`/story/:id`, (req, res) => {
 app.get(`/user/:id`, (req, res) => {
   res.send('samesame');
 });
+app.post(`/story`, (req, res) => {
+  let { story, paragraph } = req.body;
+  console.log(story, paragraph);
+});
 app.post(`/user`, (req, res) => {});
 app.post(`/user/:id`, (req, res) => {});
 app.post(`/story/delete`, (req, res) => {});
 app.post(`/logout`, (req, res) => {});
-//no login page, but login route
 // story
 // put contribution
 // get/story/completed
@@ -92,4 +95,3 @@ app.post(`/logout`, (req, res) => {});
 // post/user/id
 // post/story/delete
 // post/logout
-//watch funfunfunction for higher order function filter usage
