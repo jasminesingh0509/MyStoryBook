@@ -8,6 +8,8 @@ const bodyParser = require('body-parser');
 const sass = require('node-sass-middleware');
 const app = express();
 const morgan = require('morgan');
+const pool = require('../MyStoryBook/db/pool-queries/pool-query');
+const { getStory, browse } = require('../MyStoryBook/db/pool-queries/search-pool');
 
 // PG database client/connection setup
 const { Pool } = require('pg');
@@ -67,9 +69,15 @@ app.get('/story/progress', (req, res) => {
 });
 
 app.get(`/story/completed`, (req, res) => {
-  res.send(
-    `I'm baby authentic meggings officia palo santo schlitz commodo ad letterpress hella af glossier everyday carry before they sold out slow-carb helvetica. Vexillologist banh mi kickstarter freegan celiac la croix, adipisicing esse. Laborum wge portland blue bottle glossier. Tumeric slow-carb lorem vaporware retro. Tote bag enamel pin pitchfork hammock small batch man bun whatever pok pok tattooed ipsum.`,
-  );
+  browse((err, stories) => {
+    if (err) {
+      return res.render(err, { err });
+    }
+    let testKeys = Object.keys(stories);
+    console.log(testKeys);
+    console.log(stories);
+    res.render('stories', { stories });
+  });
 });
 app.get(`/story/:id`, (req, res) => {
   res.send('testing 4');
@@ -79,7 +87,6 @@ app.get(`/user/:id`, (req, res) => {
 });
 app.post(`/story`, (req, res) => {
   let { story, paragraph } = req.body;
-  console.log(story, paragraph);
 });
 app.post(`/user`, (req, res) => {});
 app.post(`/user/:id`, (req, res) => {});

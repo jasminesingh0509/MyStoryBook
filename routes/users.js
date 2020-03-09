@@ -7,17 +7,18 @@
 
 const express = require('express');
 const router = express.Router();
-
+//const { browse } = require('../db/pool-queries');
+const db = require('../db/pool-queries/pool-query');
 module.exports = (db) => {
   router.get('/', (req, res) => {
     db
-      .query(`SELECT * FROM users;`)
+      .query(`SELECT * FROM stories;`)
       .then((data) => {
-        const users = data.rows;
-        res.json({ users });
+        const stories = data.rows;
+        res.render(stories, { stories });
       })
       .catch((err) => {
-        res.status(500).json({ error: err.message });
+        res.render(err, { err });
       });
   });
   return router;

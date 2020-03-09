@@ -4,6 +4,12 @@ body {
   background-color: #eee;
 
   h1 {
-    color: #244751;
+    color: #eee;
+  }
+  .bg-secondary {
+    background-color: #ffcc00 !important;
+  }
+  .bg-primary {
+    background-color: red !important;
   }
 }
