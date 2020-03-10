@@ -31,7 +31,9 @@ const getStory = (id, cb) => {
   // .text retrives the text from story object
   pool
     .query(`SELECT * FROM stories WHERE id = $1`, [id])
-    .then(res => cb(res.rows[0]))
+    .then(res => {
+      cb(null, res.rows[0]);
+    })
     .catch(err => cb(err));
 };
 
@@ -57,22 +59,25 @@ WHERE users.id = $1`,
     )
     .then(res => cb(res.rows[0]));
 };
-getStoryByUser(1);
 
 const addStory = function(story) {
   return pool.query(
     `INSERT INTO stories
-(user_id, text, created_at, updated_at, title, picture_url, is_completed) values ($1, $2, $3, $4, $5, $6) RETURNING *`,
-    [
-      stories.user_id,
-      stories.text,
-      stories.created_at,
-      stories.updated_at,
-      stories.title,
-      stories.picture_url
-    ]
+(user_id, text, title, picture_url) values ($1, $2, $3, $4) RETURNING *`,
+    [stories.user_id, stories.text, stories.title, stories.picture_url]
   );
 };
+
+// addStory({1,"hey there", 'TITLES STORY', 'www.google.ca'});
+
+// const addToText = function(text, cb) {
+//   return pool.query(
+//     "INSERT INTO stories (text) VALUES ($1) WHERE user_id = 1;",
+//     [text]
+//   );
+// };
+
+// addToText("hey heyeh eyeyey", console.log);
 
 const getStoryWithContributions = function(story) {
   // in object we will have to retrive the object keys for each text
