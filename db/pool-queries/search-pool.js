@@ -1,46 +1,49 @@
 const pool = require(`./pool-query`);
 
-const browse = (cb) => {
+const browse = cb => {
   pool
     .query(`SELECT * FROM stories`)
-    .then((res) => {
+    .then(res => {
       cb(null, res.rows);
     })
-    .catch((err) => cb(err));
+    .catch(err => cb(err));
 };
 
 const read = (id, cb) => {
   pool
-    .query(`SELECT * FROM stories WHERE id = $1`, [ id ])
-    .then((res) => {
+    .query(`SELECT * FROM stories WHERE id = $1`, [id])
+    .then(res => {
       cb(null, res.rows[0]);
     })
-    .catch((err) => cb(err));
+    .catch(err => cb(err));
 };
 
 const usersWithName = (name, cb) => {
   pool
-    .query(`SELECT * FROM users WHERE name = $1`, [ name ])
-    .then((res) => {
+    .query(`SELECT * FROM users WHERE name = $1`, [name])
+    .then(res => {
       cb(null, res.rows[0]);
     })
-    .catch((err) => cb(err));
+    .catch(err => cb(err));
 };
 
 const getStory = (id, cb) => {
   // .text retrives the text from story object
-  pool.query(`SELECT * FROM stories WHERE id = $1`, [ id ]).then((res) => cb(res.rows[0])).catch((err) => cb(err));
+  pool
+    .query(`SELECT * FROM stories WHERE id = $1`, [id])
+    .then(res => cb(res.rows[0]))
+    .catch(err => cb(err));
 };
 
 const edit = (id, stories, cb) => {
-  const sql = 'UPDATE stories SET text = $2 WHERE id = $1;';
-  const args = [ id, stories ];
+  const sql = "UPDATE stories SET text = $2 WHERE id = $1;";
+  const args = [id, stories];
   pool
     .query(sql, args)
     .then(() => {
-      cb(null, 'story updated succesfully');
+      cb(null, "story updated succesfully");
     })
-    .catch((err) => cb(err));
+    .catch(err => cb(err));
 };
 
 const getStoryByUser = function(id, cb) {
@@ -50,16 +53,23 @@ const getStoryByUser = function(id, cb) {
 From stories
 Join users ON users.id = user_id
 WHERE users.id = $1`,
-      [ id ],
+      [id]
     )
-    .then((res) => cb(res.rows[0]));
+    .then(res => cb(res.rows[0]));
 };
 getStoryByUser(1);
 const addStory = function(story) {
   return pool.query(
     `INSERT INTO stories
 (user_id, text, created_at, updated_at, title, picture_url, is_completed) values ($1, $2, $3, $4, $5, $6) RETURNING *`,
-    [ stories.user_id, stories.text, stories.created_at, stories.updated_at, stories.title, stories.picture_url ],
+    [
+      stories.user_id,
+      stories.text,
+      stories.created_at,
+      stories.updated_at,
+      stories.title,
+      stories.picture_url
+    ]
   );
 };
 
@@ -72,10 +82,10 @@ From contributions
 Join stories on stories.id = story_id
 WHERE stories.id = $1
 ORDER BY contributions.order_by`,
-      [ story ],
+      [story]
     )
-    .then((res) => res.rows)
-    .catch((err) => console.log(err));
+    .then(res => res.rows)
+    .catch(err => console.log(err));
 };
 
 const addContributionsToStory = function(story) {
@@ -91,20 +101,20 @@ const getCompletedStory = function() {
 FROM contributions
 JOIN stories on stories.id = story_id
 WHERE stories.is_completed = true
-ORDER BY contributions.order_by`,
+ORDER BY contributions.order_by`
     )
-    .then((res) => res.rows);
+    .then(res => res.rows);
 };
 
 const del = (id, cb) => {
-  const sql = 'DELETE FROM stories WHERE id = $1;';
-  const args = [ id ];
+  const sql = "DELETE FROM stories WHERE id = $1;";
+  const args = [id];
   pool
     .query(sql, args)
     .then(() => {
-      cb(null, 'deleted sucessfully');
+      cb(null, "deleted sucessfully");
     })
-    .catch((err) => cb(err));
+    .catch(err => cb(err));
 };
 
 //console.log(getCompletedStory());
@@ -131,4 +141,5 @@ module.exports = {
   browse,
   read,
   edit,
+  del
 };
