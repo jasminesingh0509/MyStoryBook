@@ -26,10 +26,7 @@ const usersWithName = (name, cb) => {
     })
     .catch(err => cb(err));
 };
-<<<<<<< HEAD
-=======
 
->>>>>>> de15c4e5b220d036f82a746e2823e1a30b0a035f
 const getStory = (id, cb) => {
   // .text retrives the text from story object
   pool
@@ -61,6 +58,7 @@ WHERE users.id = $1`,
     .then(res => cb(res.rows[0]));
 };
 getStoryByUser(1);
+
 const addStory = function(story) {
   return pool.query(
     `INSERT INTO stories
@@ -106,11 +104,7 @@ JOIN stories on stories.id = story_id
 WHERE stories.is_completed = true
 ORDER BY contributions.order_by`
     )
-<<<<<<< HEAD
-    .then(res => console.log(res.rows));
-=======
     .then(res => res.rows);
->>>>>>> de15c4e5b220d036f82a746e2823e1a30b0a035f
 };
 
 const del = (id, cb) => {
@@ -146,11 +140,7 @@ module.exports = {
   addStory,
   usersWithName,
   browse,
-<<<<<<< HEAD
-  edit
-=======
   read,
   edit,
   del
->>>>>>> de15c4e5b220d036f82a746e2823e1a30b0a035f
 };
