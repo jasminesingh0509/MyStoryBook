@@ -73,9 +73,7 @@ app.get(`/story/completed`, (req, res) => {
     if (err) {
       return res.render(err, { err });
     }
-    let testKeys = Object.keys(stories);
-    console.log(testKeys);
-    console.log(stories);
+    //stories object being rendered into the page of //stories.ejs
     res.render('stories', { stories });
   });
 });
@@ -84,7 +82,7 @@ app.get(`/story/:id`, (req, res) => {
     if (err) {
       return res.render('error', { err });
     }
-    res.render('stories', stories);
+    res.render('stories', { stories });
   });
 });
 app.get(`/user/:id`, (req, res) => {
