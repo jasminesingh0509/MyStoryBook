@@ -81,7 +81,7 @@ JOIN stories on stories.id = story_id
 WHERE stories.is_completed = true
 ORDER BY contributions.order_by`,
     )
-    .then((res) => console.log(res.rows));
+    .then((res) => res.rows);
 };
 
 const del = (id, cb) => {

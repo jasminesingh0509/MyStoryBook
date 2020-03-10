@@ -62,7 +62,12 @@ app.listen(PORT, () => {
 });
 
 app.get('/story', (req, res) => {
-  res.render(`stories`);
+  browse((err, stories) => {
+    if (err) {
+      return res.render(err, { err });
+    }
+    res.render('index', { stories });
+  });
 });
 app.get('/story/progress', (req, res) => {
   res.send('baby authentic meggings');
@@ -73,9 +78,7 @@ app.get(`/story/completed`, (req, res) => {
     if (err) {
       return res.render(err, { err });
     }
-    let testKeys = Object.keys(stories);
-    console.log(testKeys);
-    console.log(stories[0]['text']);
+    //console.log(stories[0]['text']);
     res.render('stories', { stories });
   });
 });
@@ -92,14 +95,14 @@ app.get(`/user/:id`, (req, res) => {
     if (err) {
       return res.render('error', { err });
     }
-    console.log(`stories`, req.params.id);
+    //console.log(`stories`, req.params.id);
     res.render(`stories`, { stories });
   });
 });
 app.post(`/story`, (req, res) => {
   let { story, paragraph } = req.body;
   //just for LULS
-  console.log(story, paragraph);
+  //  console.log(story, paragraph);
 });
 app.post(`/user`, (req, res) => {});
 app.post(`/user/:id`, (req, res) => {});
