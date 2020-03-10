@@ -9,7 +9,7 @@ const sass = require('node-sass-middleware');
 const app = express();
 const morgan = require('morgan');
 const pool = require('../MyStoryBook/db/pool-queries/pool-query');
-const { getStory, browse, read } = require('../MyStoryBook/db/pool-queries/search-pool');
+const { getStory, browse, getStoryByUser } = require('../MyStoryBook/db/pool-queries/search-pool');
 
 // PG database client/connection setup
 const { Pool } = require('pg');
@@ -104,6 +104,26 @@ app.get(`/user/:id`, (req, res) => {
 app.post(`/story`, (req, res) => {
   let { story, paragraph } = req.body;
   console.log(`storytext test in post`);
+  getStory(req.params.id, (err, stories) => {
+    if (err) {
+      return res.render('error', { err });
+    }
+    res.render('stories', { stories });
+  });
+});
+app.get(`/user/:id`, (req, res) => {
+  getStoryByUser(req.params.id, (err, stories) => {
+    if (err) {
+      return res.render('error', { err });
+    }
+    console.log(`stories`, req.params.id);
+    res.render(`stories`, { stories });
+  });
+});
+app.post(`/story`, (req, res) => {
+  let { story, paragraph } = req.body;
+  //just for LULS
+  console.log(story, paragraph);
 });
 app.post(`/user`, (req, res) => {});
 app.post(`/user/:id`, (req, res) => {});

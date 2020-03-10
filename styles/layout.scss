@@ -2,10 +2,12 @@
 
 body {
   background-color: #eee;
+  font-family: 'Sniglet', cursive;
 
   h1 {
     color: #eee;
   }
+
   .bg-secondary {
     background-color: #ffcc00 !important;
   }
@@ -13,4 +15,50 @@ body {
   .bg-primary {
     background-image: url(‘https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSQZWAaG0lRgLDKBgefc4GDjYnBMK_fyF8a1Y1aAhMFbAFGXn0L’) !important;
   }
+}
+
+.mystories {
+  display: flex;
+  flex-direction: column;
+  height: 55vh;
+  background-color: #58afad;
+  background-image: url(https://www.transparenttextures.com/patterns/arches.png);
+}
+
+.friendsstories {
+  display: flex;
+  background-color: #2d82c1;
+  height: 26vh;
+  justify-content: center;
+  background-image: url(https://www.transparenttextures.com/patterns/arches.png);
+  p {
+    align-items: center;
+    display: flex;
+    margin: 0 auto;
+  }
+}
+
+footer {
+  background-color: orange;
+  background-image: url("https://www.transparenttextures.com/patterns/arches.png");
+  position: static;
+  height: 30px;
+}
+
+.story-title {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  align-self: center;
+}
+.story-here {
+  display: flex;
+  align-self: center;
+  padding-top: 13vh;
+}
+
+button {
+  border-radius: 5px;
+  color: red;
+  background-color: royalblue;
 }
