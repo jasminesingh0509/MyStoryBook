@@ -18,6 +18,6 @@ VALUES
 04:05:06', 'Sleepy princess', 'https://previews.123rf.com/images/sivanova/sivanova1208/sivanova120800004/14751000-illustration-of-sleeping-princess-isolated-on-white-background.jpg
     ', false ),
 
-  ( 1, 'The clouds are made of cotton candy.', '1g999-01-08
+  ( 1, 'The clouds are made of cotton candy.', '1999-01-08
 04:05:06', NOW(), 'The Sky', 'https://c8.alamy.com/comp/DBJ2CC/childs-drawing-horse-under-rainbow-in-blue-sky-DBJ2CC.jpg
     ', false );

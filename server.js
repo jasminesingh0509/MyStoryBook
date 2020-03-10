@@ -9,7 +9,7 @@ const sass = require('node-sass-middleware');
 const app = express();
 const morgan = require('morgan');
 const pool = require('../MyStoryBook/db/pool-queries/pool-query');
-const { getStory, browse } = require('../MyStoryBook/db/pool-queries/search-pool');
+const { getStory, browse, getStoryByUser } = require('../MyStoryBook/db/pool-queries/search-pool');
 
 // PG database client/connection setup
 const { Pool } = require('pg');
@@ -86,7 +86,13 @@ app.get(`/story/:id`, (req, res) => {
   });
 });
 app.get(`/user/:id`, (req, res) => {
-  res.send('samesame');
+  getStoryByUser(req.params.id, (err, stories) => {
+    if (err) {
+      return res.render('error', { err });
+    }
+    console.log(`stories`, req.params.id);
+    res.render(`stories`, { stories });
+  });
 });
 app.post(`/story`, (req, res) => {
   let { story, paragraph } = req.body;

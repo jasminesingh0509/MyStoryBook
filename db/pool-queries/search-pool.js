@@ -31,7 +31,7 @@ const edit = (id, stories, cb) => {
     .catch((err) => cb(err));
 };
 
-const getStoryByUser = function(id) {
+const getStoryByUser = function(id, cb) {
   return pool
     .query(
       `SELECT users.name, (stories.*)
@@ -40,7 +40,7 @@ Join users ON users.id = user_id
 WHERE users.id = $1`,
       [ id ],
     )
-    .then((res) => res.rows[0]);
+    .then((res) => cb(res.rows[0]));
 };
 
 const addStory = function(story) {
@@ -72,7 +72,7 @@ const addContributionsToStory = function(story) {
 };
 //getStoryWithContributions(1);
 
-const getCompletedStory = function(story) {
+const getCompletedStory = function() {
   return pool
     .query(
       `SELECT stories.title as titles, stories.text as storytext, contributions.text as contributiontext
