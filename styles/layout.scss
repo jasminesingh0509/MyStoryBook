@@ -19,14 +19,31 @@ body {
 
 .mystories {
   display: flex;
+  padding-top: 120px;
   background-color: teal;
-  height: 30%;
-  width: 30%;
+  height: 50%;
+  width: 100%;
 }
 
 .friendsstories {
   display: flex;
+  padding-top: 120px;
   background-color: blue;
-  height: 30%;
-  width: 30%;
+  height: 100%;
+  width: 100%;
+}
+
+footer {
+  background-color: orange;
+  background-image: url("https://www.transparenttextures.com/patterns/arches.png");
+  height: 50px;
+  width: 100%;
+  z-index: 999;
+  padding: 1.5em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+
+
 }
