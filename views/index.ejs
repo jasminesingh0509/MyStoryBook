@@ -32,9 +32,9 @@
   <script src="https://kit.fontawesome.com/cd7e20452a.js"></script>
 
   <!-- App JS -->
-  <script type="text/javascript" src="/scripts/client.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
+    <script type="text/javascript" src="/scripts/jquery-app.js"></script>
 
-  <script type="text/javascript" src="/scripts/composer-char-counter.js"></script>
 </head>
 
 <body>
@@ -62,8 +62,9 @@
 
   </div>
   <div class="friendsstories">
-    <p> PUT MY FRIENDS STORIES HERE</p>
-    <p> Put my other friends story here!</p>
+    <p> <% for(let [key, value] of Object.entries(stories)) {%></p>
+    <p> <%= value.text %></p>
+    <% } %>
     <p> Put my 3rd friends story here!</p>
   </div>
   <footer> Created by </footer>
