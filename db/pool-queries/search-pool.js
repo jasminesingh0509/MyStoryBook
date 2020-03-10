@@ -27,7 +27,6 @@ const usersWithName = (name, cb) => {
     .catch((err) => cb(err));
 };
 
-const getStory = function(id) {
 const getStory = (id, cb) => {
   // .text retrives the text from story object
   pool.query(`SELECT * FROM stories WHERE id = $1`, [ id ]).then((res) => cb(res.rows[0])).catch((err) => cb(err));
@@ -132,4 +131,4 @@ module.exports = {
   browse,
   read,
   edit,
-}
+};
