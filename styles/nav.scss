@@ -1,31 +1,26 @@
 .navbar {
   background-color: #ffcc00;
   background-image: url("https://www.transparenttextures.com/patterns/arches.png");
-  height: 120px;
+  height: 10vh;
   width: 100%;
   z-index: 999;
-  padding: 1.5em;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   position: fixed;
-  top: 0px;
 }
 
 #logo {
-  font-family: Bungee;
-  color: #FFFFFF;
-  padding: 1.5em;
+  color: #ffffff;
 }
 
 #compose {
   font-family: 'Sniglet', cursive;
   font-size: xx-large;
-
+  padding-top: 30px;
 }
 
 @keyframes bounce {
-
   from,
   20%,
   53%,

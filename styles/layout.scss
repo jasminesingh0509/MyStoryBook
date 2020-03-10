@@ -19,31 +19,46 @@ body {
 
 .mystories {
   display: flex;
-  padding-top: 120px;
-  background-color: teal;
-  height: 50%;
-  width: 100%;
+  flex-direction: column;
+  height: 55vh;
+  background-color: #58afad;
+  background-image: url(https://www.transparenttextures.com/patterns/arches.png);
 }
 
 .friendsstories {
   display: flex;
-  padding-top: 120px;
-  background-color: blue;
-  height: 100%;
-  width: 100%;
+  background-color: #2d82c1;
+  height: 26vh;
+  justify-content: center;
+  background-image: url(https://www.transparenttextures.com/patterns/arches.png);
+  p {
+    align-items: center;
+    display: flex;
+    margin: 0 auto;
+  }
 }
 
 footer {
   background-color: orange;
   background-image: url("https://www.transparenttextures.com/patterns/arches.png");
-  height: 50px;
-  width: 100%;
-  z-index: 999;
-  padding: 1.5em;
+  position: static;
+  height: 30px;
+}
+
+.story-title {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: fixed;
+  flex-direction: column;
+  width: 50%;
+  align-self: center;
+}
+.story-here {
+  display: flex;
+  align-self: center;
+  padding-top: 13vh;
+}
 
-
+button {
+  border-radius: 5px;
+  color: red;
+  background-color: royalblue;
 }

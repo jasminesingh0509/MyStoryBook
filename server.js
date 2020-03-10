@@ -98,6 +98,8 @@ app.get(`/user/:id`, (req, res) => {
 });
 app.post(`/story`, (req, res) => {
   let { story, paragraph } = req.body;
+  //just for LULS
+  console.log(story, paragraph);
 });
 app.post(`/user`, (req, res) => {});
 app.post(`/user/:id`, (req, res) => {});
