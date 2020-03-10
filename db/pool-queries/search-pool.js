@@ -26,12 +26,9 @@ const usersWithName = (name, cb) => {
     })
     .catch((err) => cb(err));
 };
-<<<<<<< HEAD
 
 const getStory = function(id) {
-=======
 const getStory = (id, cb) => {
->>>>>>> joseph/routes
   // .text retrives the text from story object
   pool.query(`SELECT * FROM stories WHERE id = $1`, [ id ]).then((res) => cb(res.rows[0])).catch((err) => cb(err));
 };
@@ -133,9 +130,6 @@ module.exports = {
   addStory,
   usersWithName,
   browse,
-<<<<<<< HEAD
   read,
-=======
   edit,
->>>>>>> joseph/routes
-};
+}
