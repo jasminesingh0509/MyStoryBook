@@ -73,7 +73,9 @@ app.get(`/story/completed`, (req, res) => {
     if (err) {
       return res.render(err, { err });
     }
-    //stories object being rendered into the page of //stories.ejs
+    let testKeys = Object.keys(stories);
+    console.log(testKeys);
+    console.log(stories[0]['text']);
     res.render('stories', { stories });
   });
 });

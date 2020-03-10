@@ -2,14 +2,48 @@
 
 body {
   background-color: #eee;
+  font-family: 'Sniglet', cursive;
 
   h1 {
     color: #eee;
   }
+
   .bg-secondary {
     background-color: #ffcc00 !important;
   }
+
   .bg-primary {
-    background-color: red !important;
+    background-image: url(‘https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSQZWAaG0lRgLDKBgefc4GDjYnBMK_fyF8a1Y1aAhMFbAFGXn0L’) !important;
   }
+}
+
+.mystories {
+  display: flex;
+  padding-top: 120px;
+  background-color: teal;
+  height: 50%;
+  width: 100%;
+}
+
+.friendsstories {
+  display: flex;
+  padding-top: 120px;
+  background-color: blue;
+  height: 100%;
+  width: 100%;
+}
+
+footer {
+  background-color: orange;
+  background-image: url("https://www.transparenttextures.com/patterns/arches.png");
+  height: 50px;
+  width: 100%;
+  z-index: 999;
+  padding: 1.5em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+
+
 }
