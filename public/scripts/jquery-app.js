@@ -19,8 +19,23 @@ $(document).ready(function() {
         <div> </div>
       </footer>
    </article> `);
-    return $('.friendsstories').append($story);
+    return $(".friendsstories").append($story);
   };
   createStoryElement();
-  console.log(createStoryElement());
+
+  // const display = $(".upvote");
+  // $(".contribution")
+  //   .find("#textArea")
+  //   .one("click", function(event) {
+  //     const count = $(this).val().length;
+  //     display.text(count);
+  //     console.log(count);
+  //   });
+
+  let count = 0;
+
+  $("#update").click(function() {
+    count++;
+    $("#counter").html("My current count is: " + count);
+  });
 });

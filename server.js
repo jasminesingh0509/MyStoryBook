@@ -7,6 +7,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const sass = require("node-sass-middleware");
 const app = express();
+const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 const pool = require("../MyStoryBook/db/pool-queries/pool-query");
 const {
@@ -38,6 +39,7 @@ app.use(
   })
 );
 app.use(express.static("public"));
+app.use(cookieParser());
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
@@ -65,9 +67,8 @@ app.get("/", (req, res) => {
   });
 });
 
-app.get(`/login/:id`, (req, res) => {
-  //req.session.user_id = req.params.id
-  res.redirect(`/`);
+app.get(`/login/`, (req, res) => {
+  res.redirect(`/story`);
 });
 
 app.listen(PORT, () => {
@@ -75,11 +76,15 @@ app.listen(PORT, () => {
 });
 
 app.get("/story", (req, res) => {
+  let userId = req.params.userId;
+  console.log(userId);
   browse((err, stories) => {
     if (err) {
       return res.render(err, { err });
     }
-    res.render("index", { stories });
+    let userId = stories[0][`user_id`];
+    res.cookie("userId", userId);
+    res.render("index", { stories, userId });
   });
 });
 
@@ -98,29 +103,23 @@ app.get(`/story/completed`, (req, res) => {
 });
 
 app.get(`/story/:id`, (req, res) => {
-  read(req.params.id, (err, stories) => {
+  getStory(req.params.id, (err, stories) => {
     if (err) {
       return res.render("error", { err });
     }
-    console.log(stories);
-    res.render("stories", { stories });
+    res.render("stories", stories);
   });
   //res.send('testing 4');
 });
 
 app.get(`/user/:id`, (req, res) => {
-  //res.send('samesame');
-});
-
-app.post(`/story`, (req, res) => {
-  let { story, paragraph } = req.body;
-  console.log(`storytext test in post`);
   getStory(req.params.id, (err, stories) => {
     if (err) {
       return res.render("error", { err });
     }
     res.render("stories", { stories });
   });
+  //res.send('testing 4');
 });
 
 app.get(`/user/:id`, (req, res) => {
@@ -135,8 +134,13 @@ app.get(`/user/:id`, (req, res) => {
 
 app.post(`/story`, (req, res) => {
   let { story, paragraph } = req.body;
-  //just for LULS
-  //  console.log(story, paragraph);
+  console.log(`storytext test in post`);
+  getStory(req.params.id, (err, stories) => {
+    if (err) {
+      return res.render("error", { err });
+    }
+    res.render("stories", { stories });
+  });
 });
 
 app.post(`/user`, (req, res) => {});

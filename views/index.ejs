@@ -33,7 +33,7 @@
 
   <!-- App JS -->
   <script type="text/javascript" src="/scripts/app.js"></script>
-    <script type="text/javascript" src="/scripts/jquery-app.js"></script>
+  <script type="text/javascript" src="/scripts/jquery-app.js"></script>
 
 </head>
 
@@ -52,20 +52,21 @@
   <div class="mystories">
     <p class="story-here"> PUT THE STORIES HERE</p>
     <form action="/story" method="POST" class="story-title">
-  <label>title here!: </label>
-  <input type="text" name="story"/>
-  <label>story here!</label>
-  <input type="text" name="paragraph"/>
-    <button type="ADD" class="btn btn-primary">Add your story!</button>
+      <label>title here!: </label>
+      <input type="text" name="title" />
+      <label>story here!</label>
+      <input type="text" name="text" />
+      <button type="ADD" class="btn btn-primary">Add your story!</button>
   </div>
   </form>
 
   </div>
   <div class="friendsstories">
-    <p> <% for(let [key, value] of Object.entries(stories)) {%></p>
-    <p> <%= value.text %></p>
+    <p> <% for(let key of stories) {%></p>
+    <p> <%= stories.key %></p>
     <% } %>
     <p> Put my 3rd friends story here!</p>
+    <span id="counter">COUNTER HERE</span>
   </div>
   <footer> Created by </footer>
 
