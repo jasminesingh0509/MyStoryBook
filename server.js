@@ -19,7 +19,8 @@ const {
   incomplete,
   addStory,
   completeAStory,
-  addContributions
+  addContributions,
+  getStoryWithContributions
 } = require("../MyStoryBook/db/pool-queries/search-pool");
 
 // PG database client/connection setup
@@ -116,13 +117,20 @@ app.get(`/story/completed`, (req, res) => {
 });
 
 app.get(`/story/:id`, (req, res) => {
-  getStory(req.params.id, (err, stories) => {
+  console.log(req.params.id);
+  getStory(req.params.id, (err, story) => {
+    console.log(story);
+
     if (err) {
       return res.render("error", { err });
     }
-    //getCONTRIBUTION => err, contributions
-    //
-    res.render("story", { story });
+    getStoryWithContributions(story, (err, contribution) => {
+      if (err) {
+        return res.render("error", { err });
+      }
+      console.log(contribution);
+      res.render("story", { story });
+    });
   });
   //res.send('testing 4');
 });
@@ -145,6 +153,10 @@ app.get(`/user/:id`, (req, res) => {
     //console.log(`stories`, req.params.id);
     res.render(`stories`, { stories });
   });
+});
+
+app.get("/contribution", (req, res) => {
+  res.render("contributions");
 });
 
 //Add story here
