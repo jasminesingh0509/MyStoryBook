@@ -13,11 +13,12 @@ const pool = require("../MyStoryBook/db/pool-queries/pool-query");
 const {
   getStory,
   browse,
-  getStoryByUser,
+  getStoryByUserId,
   del,
   getCompletedStory,
   incomplete,
-  addStory
+  addStory,
+  completeAStory
 } = require("../MyStoryBook/db/pool-queries/search-pool");
 
 // PG database client/connection setup
@@ -130,7 +131,7 @@ app.get(`/story/:id`, (req, res) => {
 // });
 
 app.get(`/user/:id`, (req, res) => {
-  getStoryByUser(req.params.id, (err, stories) => {
+  getStoryByUserId(req.params.id, (err, stories) => {
     if (err) {
       return res.render("error", { err });
     }
@@ -143,6 +144,14 @@ app.get(`/user/:id`, (req, res) => {
 app.post(`/story`, (req, res) => {
   let { title, text } = req.body;
   addStory(title, text, err => {
+    if (err) {
+      return res.render("error", { err });
+    }
+  });
+});
+
+app.post("/story/completed", (req, res) => {
+  completeAStory(err => {
     if (err) {
       return res.render("error", { err });
     }

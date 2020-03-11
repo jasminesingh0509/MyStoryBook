@@ -37,19 +37,19 @@ const getStory = (id, cb) => {
     .catch(err => cb(err));
 };
 
-const edit = (id, stories, cb) => {
-  const sql = "UPDATE stories SET text = $2 WHERE id = $1;";
-  const args = [id, stories];
-  pool
-    .query(sql, args)
-    .then(() => {
-      cb(null, "story updated succesfully");
-    })
-    .catch(err => cb(err));
-};
+// const edit = (id, stories, cb) => {
+//   const sql = "UPDATE stories SET text = $2 WHERE id = $1;";
+//   const args = [id, stories];
+//   pool
+//     .query(sql, args)
+//     .then(() => {
+//       cb(null, "story updated succesfully");
+//     })
+//     .catch(err => cb(err));
+// };
 
-const getStoryByUser = function(id, cb) {
-  return pool
+const getStoryByUserId = function(id, cb) {
+  pool
     .query(
       `SELECT users.name, (stories.*)
 From stories
@@ -84,9 +84,9 @@ const addStory = function(title, text, cb) {
 
 // addToText("hey heyeh eyeyey", console.log);
 
-const getStoryWithContributions = function(story) {
+const getStoryWithContributions = function(story, cb) {
   // in object we will have to retrive the object keys for each text
-  return pool
+  pool
     .query(
       `SELECT stories.title as titles, stories.text as storytext, contributions.text as contributiontext
 From contributions
@@ -95,18 +95,23 @@ WHERE stories.id = $1
 ORDER BY contributions.order_by`,
       [story]
     )
-    .then(res => res.rows)
+    .then(res => cb(res.rows))
     .catch(err => console.log(err));
 };
 
-const addContributionsToStory = function(story) {
-  return pool.query(`INSERT INTO contributions (
-  user_id, story_id, text, order_by) values($1, $2, $3, $4)`);
+const addContributions = function(story, cb) {
+  pool
+    .query(
+      `INSERT INTO contributions (
+  user_id, story_id, text, order_by) values(1, $2, $3, $4)`
+    )
+    .then(res => cb(res.rows))
+    .catch(err => console.log(err));
 };
 //getStoryWithContributions(1);
 
 const getCompletedStory = function(cb) {
-  return pool
+  pool
     .query(
       `SELECT stories.title as titles, stories.text as storytext, contributions.text as contributiontext
 FROM contributions
@@ -130,32 +135,42 @@ const del = (id, cb) => {
 };
 
 const incomplete = function(cb) {
-  return pool
+  pool
     .query(
       "SELECT stories.title, stories.text FROM stories where stories.is_completed = FALSE GROUP by stories.id"
     )
     .then(res => cb(res.rows));
 };
 
-const contributions = function() {
-  return pool
+const completeAStory = function(cb) {
+  pool
+    .query("UPDATE stories SET is_completed = true WHERE stories.id = 2;")
+    .then(res => cb(res.rows))
+    .catch(err => cb(err));
+};
+
+completeAStory();
+
+const getContributionsWithStoryID = function(cb) {
+  pool
     .query(
       "SELECT contributions.text, contributions.id, contributions.story_id From contributions JOIN stories on stories.id= story_id order by contributions.story_id;"
     )
-    .then(res => res.rows);
+    .then(res => cb(res.rows));
 };
 
 module.exports = {
   getCompletedStory,
   getStory,
-  getStoryByUser,
+  getStoryByUserId,
   getStoryWithContributions,
   addStory,
   usersWithName,
   browse,
   read,
-  edit,
   del,
   incomplete,
-  contributions
+  getContributionsWithStoryID,
+  addContributions,
+  completeAStory
 };
