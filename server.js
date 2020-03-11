@@ -16,7 +16,8 @@ const {
   getStoryByUser,
   del,
   getCompletedStory,
-  incomplete
+  incomplete,
+  addStory
 } = require("../MyStoryBook/db/pool-queries/search-pool");
 
 // PG database client/connection setup
@@ -129,16 +130,21 @@ app.get(`/user/:id`, (req, res) => {
 });
 
 //Add story here
-// app.post(`/story`, (req, res) => {
-//   let { story, paragraph } = req.body;
-//   console.log(`storytext test in post`);
-//   (req.params.id, (err, stories) => {
-//     if (err) {
-//       return res.render("error", { err });
-//     }
-//     res.render("stories", { stories });
-//   });
-// });
+app.post(`/story`, (req, res) => {
+  let { story, paragraph } = req.body;
+  console.log(`storytext test in post`);
+  addStory(story)
+    .then(() => {
+      if (err) {
+        return res.render("error", { err });
+      }
+      console.log("sucessfully added story");
+      res.render("stories", { stories });
+    })
+    .catch(() => {
+      return res.render("error", { err });
+    });
+});
 
 //DELETE POST
 app.post(`/story/:id/delete`, (req, res) => {
