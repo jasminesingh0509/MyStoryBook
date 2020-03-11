@@ -13,7 +13,10 @@ const pool = require("../MyStoryBook/db/pool-queries/pool-query");
 const {
   getStory,
   browse,
-  getStoryByUser
+  getStoryByUser,
+  del,
+  getCompletedStory,
+  incomplete
 } = require("../MyStoryBook/db/pool-queries/search-pool");
 
 // PG database client/connection setup
@@ -89,15 +92,19 @@ app.get("/story", (req, res) => {
 });
 
 app.get("/story/progress", (req, res) => {
-  // res.send('baby authentic meggings');
-});
-
-app.get(`/story/completed`, (req, res) => {
-  browse((err, stories) => {
+  incomplete((err, stories) => {
     if (err) {
       return res.render(err, { err });
     }
-    //console.log(stories[0]['text']);
+    res.render("stories", { stories });
+  });
+});
+
+app.get(`/story/completed`, (req, res) => {
+  getCompletedStory((err, stories) => {
+    if (err) {
+      return res.render(err, { err });
+    }
     res.render("stories", { stories });
   });
 });
@@ -113,16 +120,6 @@ app.get(`/story/:id`, (req, res) => {
 });
 
 app.get(`/user/:id`, (req, res) => {
-  getStory(req.params.id, (err, stories) => {
-    if (err) {
-      return res.render("error", { err });
-    }
-    res.render("stories", { stories });
-  });
-  //res.send('testing 4');
-});
-
-app.get(`/user/:id`, (req, res) => {
   getStoryByUser(req.params.id, (err, stories) => {
     if (err) {
       return res.render("error", { err });
@@ -132,20 +129,17 @@ app.get(`/user/:id`, (req, res) => {
   });
 });
 
-app.post(`/story`, (req, res) => {
-  let { story, paragraph } = req.body;
-  console.log(`storytext test in post`);
-  getStory(req.params.id, (err, stories) => {
-    if (err) {
-      return res.render("error", { err });
-    }
-    res.render("stories", { stories });
-  });
-});
-
-app.post(`/user`, (req, res) => {});
-
-app.post(`/user/:id`, (req, res) => {});
+//Add story here
+// app.post(`/story`, (req, res) => {
+//   let { story, paragraph } = req.body;
+//   console.log(`storytext test in post`);
+//   (req.params.id, (err, stories) => {
+//     if (err) {
+//       return res.render("error", { err });
+//     }
+//     res.render("stories", { stories });
+//   });
+// });
 
 //DELETE POST
 app.post(`/story/:id/delete`, (req, res) => {

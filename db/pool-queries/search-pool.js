@@ -100,7 +100,7 @@ const addContributionsToStory = function(story) {
 };
 //getStoryWithContributions(1);
 
-const getCompletedStory = function() {
+const getCompletedStory = function(cb) {
   return pool
     .query(
       `SELECT stories.title as titles, stories.text as storytext, contributions.text as contributiontext
@@ -109,7 +109,7 @@ JOIN stories on stories.id = story_id
 WHERE stories.is_completed = true
 ORDER BY contributions.order_by`
     )
-    .then(res => res.rows);
+    .then(res => cb(res.rows));
 };
 
 const del = (id, cb) => {
@@ -123,20 +123,22 @@ const del = (id, cb) => {
     .catch(err => cb(err));
 };
 
-//console.log(getCompletedStory());
-
-/* const getIncompleteStory = function() {
+const incomplete = function(cb) {
   return pool
     .query(
-      `SELECT stories.id, stories.title as titles, stories.text as storytext, contributions.text as contributiontext
-FROM contributions
-JOIN stories on stories.id = story_id
-WHERE stories.is_completed = false
-ORDER BY stories.id`,
+      "SELECT stories.title, stories.text FROM stories where stories.is_completed = FALSE GROUP by stories.id"
     )
-    .then((res) => console.log(res.rows));
-}; */
-//console.log(getIncompleteStory());
+    .then(res => cb(res.rows));
+};
+
+const contributions = function() {
+  return pool
+    .query(
+      "SELECT contributions.text, contributions.id, contributions.story_id From contributions JOIN stories on stories.id= story_id order by contributions.story_id;"
+    )
+    .then(res => res.rows);
+};
+
 module.exports = {
   getCompletedStory,
   getStory,
@@ -147,5 +149,7 @@ module.exports = {
   browse,
   read,
   edit,
-  del
+  del,
+  incomplete,
+  contributions
 };
