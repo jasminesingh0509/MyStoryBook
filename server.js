@@ -80,7 +80,6 @@ app.listen(PORT, () => {
 
 app.get("/story", (req, res) => {
   let userId = req.params.userId;
-  console.log(userId);
   browse((err, stories) => {
     if (err) {
       return res.render(err, { err });
