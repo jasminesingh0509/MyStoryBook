@@ -52,25 +52,26 @@
   ​
   ​
   <div class="mystories">
-    <p class="story-here"> PUT THE STORIES HERE</p>
+    <p class="story-here"> PUT THE story HERE</p>
     <form action="/story" method="POST" class="story-title">
       <label>title here!: </label>
       <input type="text" name="title" />
       <label>story here!</label>
       <input type="text" name="paragraph" />
       <button type="ADD" class="btn btn-primary">Add your story!</button>
-      <button type="submit" action="UPDATE" method="PUT">Edit your story!</button>
+      <button type="submit" action="/story/completed" method="POST">Complete your Story!</button>
+
   </div>
   </form>
   ​
   </div>
-  <div class="friendsstories">
-    <p><%= stories.text %></p>
+  <div class="friendsstory">
+    <p><%= story.text %></p>
     <header></header>
     <p> </p>
     ​
   </div>
-  <footer> Created by<img src=<%=stories.picture_url %> img /></footer>
+  <footer> Created by<img src=<%=story.picture_url %> img /></footer>
   ​
 </body>
 ​

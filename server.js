@@ -18,7 +18,8 @@ const {
   getCompletedStory,
   incomplete,
   addStory,
-  completeAStory
+  completeAStory,
+  addContributions
 } = require("../MyStoryBook/db/pool-queries/search-pool");
 
 // PG database client/connection setup
@@ -62,6 +63,10 @@ app.use("/api/widgets", widgetsRoutes(db));
 // Separate them into separate routes files (see above).
 const users = {};
 const stories = {};
+
+app.get("/", (req, res) => {
+  res.redirect("/story");
+});
 
 app.get("/", (req, res) => {
   browse((err, stories) => {
@@ -115,7 +120,9 @@ app.get(`/story/:id`, (req, res) => {
     if (err) {
       return res.render("error", { err });
     }
-    res.render("story", { stories });
+    //getCONTRIBUTION => err, contributions
+    //
+    res.render("story", { story });
   });
   //res.send('testing 4');
 });
@@ -167,5 +174,14 @@ app.post(`/story/:id/delete`, (req, res) => {
     }
     //console.log(`stories`, req.params.id);
     res.render(`stories`, { stories });
+  });
+});
+
+app.post("/story/contribution", (req, res) => {
+  addContributions(req.body.id, req.body.text, (err, data) => {
+    if (err) {
+      return res.render("error", { err });
+    }
+    res.send("contribution added success!");
   });
 });

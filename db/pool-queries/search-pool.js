@@ -99,14 +99,15 @@ ORDER BY contributions.order_by`,
     .catch(err => console.log(err));
 };
 
-const addContributions = function(story, cb) {
+const addContributions = function(story_id, text, cb) {
   pool
     .query(
       `INSERT INTO contributions (
-  user_id, story_id, text, order_by) values(1, $2, $3, $4)`
+  user_id, story_id, text, order_by) values(1, $1, $2, 3)`,
+      [story_id, text]
     )
-    .then(res => cb(res.rows))
-    .catch(err => console.log(err));
+    .then(res => cb(null, res.rows))
+    .catch(err => cb(err, null));
 };
 //getStoryWithContributions(1);
 
@@ -148,8 +149,6 @@ const completeAStory = function(cb) {
     .then(res => cb(res.rows))
     .catch(err => cb(err));
 };
-
-completeAStory();
 
 const getContributionsWithStoryID = function(cb) {
   pool
