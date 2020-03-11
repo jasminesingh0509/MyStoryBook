@@ -114,10 +114,20 @@ app.get(`/story/:id`, (req, res) => {
     if (err) {
       return res.render("error", { err });
     }
-    res.render("stories", stories);
+    res.render("story", { stories });
   });
   //res.send('testing 4');
 });
+
+// app.get(`/story/:id`, (req, res) => {
+//   read(req.params.id, (err, stories) => {
+//     if (err) {
+//       res.render("error", { err });
+//     }
+//     res.render("story", { stories });
+//   });
+//   //res.send('testing 4');
+// });
 
 app.get(`/user/:id`, (req, res) => {
   getStoryByUser(req.params.id, (err, stories) => {
@@ -131,19 +141,12 @@ app.get(`/user/:id`, (req, res) => {
 
 //Add story here
 app.post(`/story`, (req, res) => {
-  let { story, paragraph } = req.body;
-  console.log(`storytext test in post`);
-  addStory(story)
-    .then(() => {
-      if (err) {
-        return res.render("error", { err });
-      }
-      console.log("sucessfully added story");
-      res.render("stories", { stories });
-    })
-    .catch(() => {
+  let { title, text } = req.body;
+  addStory(title, text, err => {
+    if (err) {
       return res.render("error", { err });
-    });
+    }
+  });
 });
 
 //DELETE POST
@@ -157,14 +160,3 @@ app.post(`/story/:id/delete`, (req, res) => {
     res.render(`stories`, { stories });
   });
 });
-
-// story
-// put contribution
-// get/story/completed
-//get/story/progress
-//get/story/age
-//get/story/id
-// post/user
-// post/user/id
-// post/story/delete
-// post/logout

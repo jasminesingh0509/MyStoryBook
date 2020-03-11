@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+​
+
+<head>
+  <!-- Meta Information -->
+  <title>My Story Book! - Home Page</title>
+  ​
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <!-- External CSS -->
+  ​
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    type="text/css" />
+  ​
+  <link href="https://fonts.googleapis.com/css?family=Bungee&display=swap" rel="stylesheet" />
+  ​
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400i,700&display=swap" rel="stylesheet" />
+  ​
+  <!-- App CSS -->
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  ​
+  <!-- Nav CSS -->
+  <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
+  ​
+  <!-- Header CSS -->
+  <link rel="stylesheet" href="/styles/header.css" type="text/css" />
+  <link href="https://fonts.googleapis.com/css2?family=Sniglet&display=swap" rel="stylesheet">
+  ​
+  ​
+  <!-- External JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
+  <script src="https://kit.fontawesome.com/cd7e20452a.js"></script>
+  ​
+  <!-- App JS -->
+  <script type="text/javascript" src="/scripts/app.js"></script>
+  <script type="text/javascript" src="/scripts/jquery-app.js"></script>
+  ​
+</head>
+​
+
+<body>
+  <!-- Top nav bar (fixed) -->
+  <nav class="navbar" id="logo">
+    <!-- <h1> My Story Book </h1> -->
+    ​
+    <span id="compose">My Story Book <i class="far fa-laugh bounce"></i></span>
+    <h1>Read a Story!</h1>
+  </nav>
+  <header id="header">
+  </header>
+  ​
+  ​
+  <div class="mystories">
+    <p class="story-here"> PUT THE STORIES HERE</p>
+    <form action="/story" method="POST" class="story-title">
+      <label>title here!: </label>
+      <input type="text" name="title" />
+      <label>story here!</label>
+      <input type="text" name="paragraph" />
+      <button type="ADD" class="btn btn-primary">Add your story!</button>
+      <button type="submit" action="UPDATE" method="PUT">Edit your story!</button>
+  </div>
+  </form>
+  ​
+  </div>
+  <div class="friendsstories">
+    <p><%= stories.text %></p>
+    <header></header>
+    <p> </p>
+    ​
+  </div>
+  <footer> Created by<img src=<%=stories.picture_url %> img /></footer>
+  ​
+</body>
+​
+
+</html>

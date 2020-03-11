@@ -60,12 +60,17 @@ WHERE users.id = $1`,
     .then(res => cb(res.rows[0]));
 };
 
-const addStory = function(story) {
-  return pool.query(
-    `INSERT INTO stories
-(user_id, text, title, picture_url) values ($1, $2, $3, $4) RETURNING *`,
-    [stories.user_id, stories.text, stories.title, stories.picture_url]
-  );
+//dont touch this one it works hard coded user_id =1
+const addStory = function(title, text, cb) {
+  const sql = `INSERT INTO stories
+(user_id, text, title, created_at, updated_at) values (1, $1, $2, NOW(), NOW())`;
+  const args = [title, text];
+  pool
+    .query(sql, args)
+    .then(() => {
+      cb(null, "added successfully");
+    })
+    .catch(err => cb(err));
 };
 
 // addStory({1,"hey there", 'TITLES STORY', 'www.google.ca'});
@@ -112,6 +117,7 @@ ORDER BY contributions.order_by`
     .then(res => cb(res.rows));
 };
 
+//THIS WORKS DONT TOUCH
 const del = (id, cb) => {
   const sql = "DELETE FROM stories WHERE id = $1;";
   const args = [id];
