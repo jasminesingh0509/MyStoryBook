@@ -1,13 +1,13 @@
 .navbar {
   background-color: #ffcc00;
-  background-image: url("https://www.transparenttextures.com/patterns/arches.png");
-  height: 10vh;
+  background-image: url(https://www.transparenttextures.com/patterns/arches.png);
+  height: 15vh;
   width: 100%;
   z-index: 999;
   display: flex;
   align-items: center;
   justify-content: space-around;
-  position: fixed;
+  position: absolute;
 }
 
 #logo {
@@ -21,6 +21,7 @@
 }
 
 @keyframes bounce {
+
   from,
   20%,
   53%,

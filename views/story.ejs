@@ -59,7 +59,6 @@
       <label>Start your start:</label>
       <input type="text" name="paragraph" />
       <button type="ADD" class="btn btn-primary">ADD YOUR STORY </button>
-      <button type="submit" action="/story/completed" method="POST">COMPLETE</button>
 
   </div>
   </form>
@@ -78,13 +77,15 @@
         <thead>
           <tr>
 
-            <th scope="col">contributions</th>
+            <th scope="col">Author</th>
+            <th scope="col">Contributions</th>
 
           </tr>
         </thead>
         <tbody>
           <% for(let key of contribution) {%>
       <tr>
+        <td><%= key.name%></td>
         <td><%= key.contributiontext%></td>
 
       </tr>
@@ -95,7 +96,8 @@
   <form action="/story/contribution" method="POST">
   <input type="hidden" name="id" value=<%=contribution[0].id%>></input>
       <input name="text" type="text"></input>
-      </form> ​
+      <button type="submit" class="btn btn-primary">ADD TO THE STORY </button> </form> ​
+
 </body>
 ​
 

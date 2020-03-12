@@ -1,8 +1,11 @@
 // See: https://sass-lang.com/
 
 body {
-  background-color: #eee;
+  background-color: dodgerblue;
+  background-image: url(https://www.transparenttextures.com/patterns/arches.png);
   font-family: 'Sniglet', cursive;
+  color: whitesmoke;
+  font-size: x-large;
 
   h1 {
     color: #eee;
@@ -20,10 +23,12 @@ body {
 .mystories {
   display: flex;
   flex-direction: column;
-  height: 55vh;
-  background-color: #58afad;
+  height: 41vh;
+  background-color: dodgerblue;
   background-image: url(https://www.transparenttextures.com/patterns/arches.png);
 }
+
+
 
 .friendsstories {
   display: flex;
@@ -59,21 +64,25 @@ footer {
 }
 
 .story-here {
+  color: white;
+  font-family: bungee;
   display: flex;
   align-self: center;
-  padding-top: 13vh;
+  padding-top: 8vh;
+  font-size: xx-large;
 }
 
 button {
-  border-radius: 5px;
-  color: red;
-  background-color: royalblue;
+  border-radius: 23px;
+  color: navy;
+  background-color: lightsteelblue;
+  font-family: bungee;
 }
 
 .story-header {
   text-align: center;
+  font-family: fantasy;
 
-  h1 {
-    color: black;
-  }
+
+
 }

@@ -43,7 +43,17 @@
   <header id="header">
   </header>
 
+  <div class="mystories">
+    <p class="story-here"> START YOUR STORY HERE !</p>
+    <form action="/story" method="POST" class="story-title">
+      <label>Title: </label>
+      <input type="text" name="title" />
+      <label>Start your story:</label>
+      <input type="text" name="paragraph" />
+      <button type="ADD" class="btn btn-primary">ADD YOUR STORY </button>
 
+  </div>
+  </form>
 
 
   <footer class="footer text-center">
@@ -51,16 +61,32 @@
       <div class="row">
         <h1 id="Pick">Pick a story!</h1>
 
+        <table class="table">
+          <thead>
+            <th scope="col">TITLE</th>
+            <th scope="col">STORY</th>
+            <th schope='col'>STATUS</th>
+            <% for(let [key, value] of Object.entries(stories)){ %>
+            <tr>
 
-        <% for(let [key, value] of Object.entries(stories)){ %>
-
-        <tr>
-          <td><%= value.title %> </td>
-          <td> <%= value.text %></td>
-        </tr>
-
-        <% } %>
+              <td><%= value.title %> </td>
+              <td> <%= value.text %></td>
+              <td><%= helper.truecheck(value.is_completed)%></td>
+              <td>
+                <form method="GET" action="/story/<%= value.id%>">
+                  <button type="ADD" class="btn btn-primary"> VIEW</button>
+                </form>
+              </td>
+            </tr>
+            <% } %>
       </div>
+
+
+      </table>
+
+
+
+
 
 
       <div class="friendsstory">

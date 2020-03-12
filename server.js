@@ -91,7 +91,6 @@ app.get(`/login/`, (req, res) => {
 
 app.get("/stories", (req, res) => {
   let userId = req.params.userId;
-
   browse((err, stories) => {
     if (err) {
       return res.render(err, { err });
@@ -100,9 +99,17 @@ app.get("/stories", (req, res) => {
       if (err) {
         return res.render("error", { err });
       }
+      let helper = {
+        truecheck: function checkCompleted(x) {
+          if (Boolean(x) === true) {
+            return "Completed";
+          }
+          return "in Progress";
+        }
+      };
       let userId = stories[0][`user_id`];
       res.cookie("userId", userId);
-      res.render("stories", { stories, userId, data });
+      res.render("stories", { stories, userId, data, helper });
     });
   });
 });

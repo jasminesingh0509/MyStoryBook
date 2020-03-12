@@ -89,8 +89,9 @@ const getStoryWithContributions = function(story_id, cb) {
   // in object we will have to retrive the object keys for each text
   pool
     .query(
-      `SELECT stories.id as id, stories.title as titles, stories.text as storytext, contributions.text as contributiontext
+      `SELECT stories.id as id, stories.title as titles, stories.text as storytext, contributions.text as contributiontext, users.name as name
 From contributions
+Join users on users.id = user_id
 Join stories on stories.id = story_id
 WHERE stories.id = $1
 ORDER BY contributions.order_by`,
