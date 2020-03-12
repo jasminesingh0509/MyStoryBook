@@ -5,19 +5,19 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 //const { browse } = require('../db/pool-queries');
-const db = require('../db/pool-queries/pool-query');
-module.exports = (db) => {
-  router.get('/', (req, res) => {
-    db
-      .query(`SELECT * FROM stories;`)
-      .then((data) => {
+const db = require("../db/pool-queries/pool-query");
+module.exports = db => {
+  router.get("/", (req, res) => {
+    db.query(`SELECT * FROM stories;`)
+      .then(data => {
+        console.log("heya");
         const stories = data.rows;
-        res.render(stories, { stories });
+        res.render("stories", { stories });
       })
-      .catch((err) => {
+      .catch(err => {
         res.render(err, { err });
       });
   });

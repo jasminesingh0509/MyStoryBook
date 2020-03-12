@@ -67,9 +67,14 @@
   </div>
   <div class="friendsstory">
 
-    <header></header>
-    <p> </p>
-    ​
+    <% for(let key of contribution) { %>
+    <tr>
+      <td><%= key.titles %></td>
+      <td><%= key.storytext %></td>
+      <td><%= key.contributiontext %></td>
+      <%}%></tr>
+      <p><%=contribution[0].titles%> </p>
+      ​
   </div>
 
   ​

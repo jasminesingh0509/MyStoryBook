@@ -90,13 +90,21 @@ app.get(`/login/`, (req, res) => {
 
 app.get("/story", (req, res) => {
   let userId = req.params.userId;
+
   browse((err, stories) => {
+    console.dir(stories);
     if (err) {
       return res.render(err, { err });
     }
-    let userId = stories[0][`user_id`];
-    res.cookie("userId", userId);
-    res.render("index", { stories, userId });
+    getStoryWithContributions(stories[0].id, (err, data) => {
+      console.log("YASSSSSSSS");
+      if (err) {
+        return res.render("error", { err });
+      }
+      let userId = stories[0][`user_id`];
+      res.cookie("userId", userId);
+      res.render("index", { stories, userId, data });
+    });
   });
 });
 
@@ -128,7 +136,6 @@ app.get(`/story/:id`, (req, res) => {
       if (err) {
         return res.render("error", { err });
       }
-      console.log("THIS IS THE CONTRIBUTION>>>>>>>>>>>>>", contribution);
       res.render("story", { story });
     });
   });

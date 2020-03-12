@@ -57,7 +57,8 @@ Join users ON users.id = user_id
 WHERE users.id = $1`,
       [id]
     )
-    .then(res => cb(res.rows[0]));
+    .then(res => cb(null, res.rows[0]))
+    .catch(err => cb(err, null));
 };
 
 //dont touch this one it works hard coded user_id =1
@@ -70,7 +71,7 @@ const addStory = function(title, text, cb) {
     .then(() => {
       cb(null, "added successfully");
     })
-    .catch(err => cb(err));
+    .catch(err => cb(err, null));
 };
 
 // addStory({1,"hey there", 'TITLES STORY', 'www.google.ca'});
@@ -84,7 +85,7 @@ const addStory = function(title, text, cb) {
 
 // addToText("hey heyeh eyeyey", console.log);
 
-const getStoryWithContributions = function(story, cb) {
+const getStoryWithContributions = function(story_id, cb) {
   // in object we will have to retrive the object keys for each text
   pool
     .query(
@@ -93,7 +94,7 @@ From contributions
 Join stories on stories.id = story_id
 WHERE stories.id = $1
 ORDER BY contributions.order_by`,
-      [story]
+      [story_id]
     )
     .then(res => cb(null, res.rows))
     .catch(err => cb(err, null));
