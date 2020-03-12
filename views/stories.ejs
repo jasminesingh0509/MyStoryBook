@@ -30,36 +30,34 @@
     <div class="container">
       <div class="row">
 
-        <!-- Footer Location -->
-        <div class="col-lg-4 mb-5 mb-lg-0">
-          <h4 class="text-uppercase mb-4">Location</h4>
-          <p> test</p>
-          <% for(let [key, value] of Object.entries(stories)){ %>
 
+        <% for(let [key, value] of Object.entries(stories)){ %>
 
-          <p><%= key %></p>
+        <h1> <%= value.title %> </h1>
+        <tr>
           <td> <%= value.text %></td>
+        </tr>
 
-          <% } %>
-        </div>
+        <% } %>
+      </div>
 
 
 
 
-        <!-- Bootstrap core JavaScript -->
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <!-- Bootstrap core JavaScript -->
+      <script src="vendor/jquery/jquery.min.js"></script>
+      <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <!-- Plugin JavaScript -->
-        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+      <!-- Plugin JavaScript -->
+      <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-        <!-- Contact Form JavaScript -->
-        <script src="js/jqBootstrapValidation.js"></script>
-        <script src="js/contact_me.js"></script>
+      <!-- Contact Form JavaScript -->
+      <script src="js/jqBootstrapValidation.js"></script>
+      <script src="js/contact_me.js"></script>
 
-        <!-- Custom scripts for this template -->
-        <script src="js/freelancer.min.js"></script>
+      <!-- Custom scripts for this template -->
+      <script src="js/freelancer.min.js"></script>
 
-        </body>
+      </body>
 
 </html>

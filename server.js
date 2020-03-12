@@ -103,7 +103,7 @@ app.get("/story", (req, res) => {
       }
       let userId = stories[0][`user_id`];
       res.cookie("userId", userId);
-      res.render("index", { stories, userId, data });
+      res.render("stories", { stories, userId, data });
     });
   });
 });
@@ -136,7 +136,7 @@ app.get(`/story/:id`, (req, res) => {
       if (err) {
         return res.render("error", { err });
       }
-      res.render("story", { story });
+      res.render("story", { story, contribution });
     });
   });
   //res.send('testing 4');

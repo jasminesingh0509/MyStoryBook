@@ -105,7 +105,7 @@ const addContributions = function(story_id, text, cb) {
     .query(
       `INSERT INTO contributions (
   user_id, story_id, text, order_by) values(1, $1, $2, 3)`,
-      [story_id, text]
+      [text]
     )
     .then(res => cb(null, res.rows))
     .catch(err => cb(err, null));
