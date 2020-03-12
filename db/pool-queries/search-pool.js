@@ -89,7 +89,7 @@ const getStoryWithContributions = function(story_id, cb) {
   // in object we will have to retrive the object keys for each text
   pool
     .query(
-      `SELECT stories.title as titles, stories.text as storytext, contributions.text as contributiontext
+      `SELECT stories.id as id, stories.title as titles, stories.text as storytext, contributions.text as contributiontext
 From contributions
 Join stories on stories.id = story_id
 WHERE stories.id = $1
@@ -105,7 +105,7 @@ const addContributions = function(story_id, text, cb) {
     .query(
       `INSERT INTO contributions (
   user_id, story_id, text, order_by) values(1, $1, $2, 3)`,
-      [text]
+      [Number(story_id), text]
     )
     .then(res => cb(null, res.rows))
     .catch(err => cb(err, null));

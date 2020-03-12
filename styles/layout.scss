@@ -31,6 +31,7 @@ body {
   height: 26vh;
   justify-content: center;
   background-image: url(https://www.transparenttextures.com/patterns/arches.png);
+
   p {
     align-items: center;
     display: flex;
@@ -42,7 +43,12 @@ footer {
   background-color: orange;
   background-image: url("https://www.transparenttextures.com/patterns/arches.png");
   position: static;
-  height: 30px;
+  height: 600px;
+}
+
+#pick {
+  font-size: xx-large;
+  color: whitesmoke;
 }
 
 .story-title {
@@ -51,6 +57,7 @@ footer {
   width: 50%;
   align-self: center;
 }
+
 .story-here {
   display: flex;
   align-self: center;
@@ -61,4 +68,12 @@ button {
   border-radius: 5px;
   color: red;
   background-color: royalblue;
+}
+
+.story-header {
+  text-align: center;
+
+  h1 {
+    color: black;
+  }
 }

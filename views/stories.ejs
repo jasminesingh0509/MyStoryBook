@@ -3,38 +3,59 @@
 
 <head>
   <!-- Meta Information -->
-  <title>My Story Book! - Home Page</title>
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <!-- External CSS -->
-
+  ​
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
     type="text/css" />
-
+  ​
   <link href="https://fonts.googleapis.com/css?family=Bungee&display=swap" rel="stylesheet" />
-
+  ​
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400i,700&display=swap" rel="stylesheet" />
-
+  ​
   <!-- App CSS -->
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-
+  ​
   <!-- Nav CSS -->
   <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
-
+  ​
   <!-- Header CSS -->
   <link rel="stylesheet" href="/styles/header.css" type="text/css" />
   <link href="https://fonts.googleapis.com/css2?family=Sniglet&display=swap" rel="stylesheet">
+  ​
+  ​
+  <!-- External JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
+  <script src="https://kit.fontawesome.com/cd7e20452a.js"></script>
+  ​
+  <!-- App JS -->
+  <script type="text/javascript" src="/scripts/app.js"></script>
+  <script type="text/javascript" src="/scripts/jquery-app.js"></script>
 
-  <input type="hidden" id="id" name="text" value=<%=stories.id%>></input>
+<body>
+  <nav class="navbar" id="logo">
+    <!-- <h1> My Story Book </h1> -->
+    ​
+    <span id="compose">My Story Book <i class="far fa-laugh bounce"></i></span>
+    <h1>Read a Story!</h1>
+  </nav>
+  <header id="header">
+  </header>
+
+
+
+
   <footer class="footer text-center">
     <div class="container">
       <div class="row">
+        <h1 id="Pick">Pick a story!</h1>
 
 
         <% for(let [key, value] of Object.entries(stories)){ %>
 
-        <h1> <%= value.title %> </h1>
         <tr>
+          <td><%= value.title %> </td>
           <td> <%= value.text %></td>
         </tr>
 
@@ -42,22 +63,26 @@
       </div>
 
 
+      <div class="friendsstory">
 
 
-      <!-- Bootstrap core JavaScript -->
-      <script src="vendor/jquery/jquery.min.js"></script>
-      <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-      <!-- Plugin JavaScript -->
-      <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-      <!-- Contact Form JavaScript -->
-      <script src="js/jqBootstrapValidation.js"></script>
-      <script src="js/contact_me.js"></script>
 
-      <!-- Custom scripts for this template -->
-      <script src="js/freelancer.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-      </body>
+        <!-- Plugin JavaScript -->
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+        <!-- Contact Form JavaScript -->
+        <script src="js/jqBootstrapValidation.js"></script>
+        <script src="js/contact_me.js"></script>
+
+        <!-- Custom scripts for this template -->
+        <script src="js/freelancer.min.js"></script>
+
+</body>
 
 </html>

@@ -72,7 +72,7 @@ app.listen(PORT, () => {
 //----------------------------GET------------------------------
 
 app.get("/", (req, res) => {
-  res.redirect("/story");
+  res.redirect("/stories");
 });
 
 app.get("/", (req, res) => {
@@ -80,24 +80,23 @@ app.get("/", (req, res) => {
     if (err) {
       return res.render(`error`, { err });
     }
+    let templateVars = { oldStory: stories };
     res.render("stories", { stories });
   });
 });
 
 app.get(`/login/`, (req, res) => {
-  res.redirect(`/story`);
+  res.redirect(`/stories`);
 });
 
-app.get("/story", (req, res) => {
+app.get("/stories", (req, res) => {
   let userId = req.params.userId;
 
   browse((err, stories) => {
-    console.dir(stories);
     if (err) {
       return res.render(err, { err });
     }
     getStoryWithContributions(stories[0].id, (err, data) => {
-      console.log("YASSSSSSSS");
       if (err) {
         return res.render("error", { err });
       }
@@ -133,10 +132,21 @@ app.get(`/story/:id`, (req, res) => {
       return res.render("error", { err });
     }
     getStoryWithContributions(req.params.id, (err, contribution) => {
+      console.log(contribution);
       if (err) {
         return res.render("error", { err });
       }
-      res.render("story", { story, contribution });
+      function storiesForUser(id, database) {
+        let urlsdatabase = {};
+        for (let stories in database) {
+          if (database[stories].user_id === id) {
+            urlsdatabase[stories] = database[stories];
+          }
+        }
+        return urlsdatabase;
+      }
+      let userStory = storiesForUser(req.params.id, story);
+      res.render("story", { userStory, contribution });
     });
   });
   //res.send('testing 4');
@@ -152,15 +162,15 @@ app.get(`/story/:id`, (req, res) => {
 //   //res.send('testing 4');
 // });
 
-app.get(`/user/:id`, (req, res) => {
-  getStoryByUserId(req.params.id, (err, stories) => {
-    if (err) {
-      return res.render("error", { err });
-    }
-    //console.log(`stories`, req.params.id);
-    res.render(`stories`, { stories });
-  });
-});
+// app.get(`/user/:id`, (req, res) => {
+//   getStoryByUserId(req.params.id, (err, stories) => {
+//     if (err) {
+//       return res.render("error", { err });
+//     }
+//     //console.log(`stories`, req.params.id);
+//     res.render(`stories`, { stories });
+//   });
+// });
 
 app.get("/contribution", (req, res) => {
   res.render("contributions");
@@ -169,16 +179,17 @@ app.get("/contribution", (req, res) => {
 //-------------------------POST------------------------------------------
 //Add story here
 app.post(`/story`, (req, res) => {
-  let { title, text } = req.body;
-  addStory(title, text, err => {
+  let { title, paragraph } = req.body;
+  addStory(title, paragraph, err => {
     if (err) {
       return res.render("error", { err });
     }
+    res.redirect("stories");
   });
 });
 
-app.post("/story/completed", (req, res) => {
-  completeAStory(err => {
+app.post("/story/completed/:id", (req, res) => {
+  completeAStory(req.params.id, err => {
     if (err) {
       return res.render("error", { err });
     }
@@ -198,10 +209,11 @@ app.post(`/story/:id/delete`, (req, res) => {
 });
 
 app.post("/story/contribution", (req, res) => {
+  console.log(">>>>>>>>>>>>>>>>>>>>>>>>>", req.body);
   addContributions(req.body.id, req.body.text, (err, data) => {
     if (err) {
       return res.render("error", { err });
     }
-    res.send("contribution added success!");
+    res.redirect(`/story/${req.body.id}`);
   });
 });

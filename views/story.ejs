@@ -52,33 +52,50 @@
   ​
   ​
   <div class="mystories">
-    <p class="story-here"> PUT THE story HERE</p>
+    <p class="story-here"> START YOUR STORY HERE !</p>
     <form action="/story" method="POST" class="story-title">
-      <label>title here!: </label>
+      <label>Title: </label>
       <input type="text" name="title" />
-      <label>story here!</label>
+      <label>Start your start:</label>
       <input type="text" name="paragraph" />
-      <button type="ADD" class="btn btn-primary">Add your story!</button>
-      <button type="submit" action="/story/completed" method="POST">Complete your Story!</button>
+      <button type="ADD" class="btn btn-primary">ADD YOUR STORY </button>
+      <button type="submit" action="/story/completed" method="POST">COMPLETE</button>
 
   </div>
   </form>
   ​
   </div>
   <div class="friendsstory">
+    <div class="story-header">
+      <% if (contribution){%>
+      <h1>Title</h1>
+      <p><%=contribution[0].titles%></p>
+      <h1>Story</h1>
+      <p><%=contribution[0].storytext%></p>
+      <%}%>
+    </div>
+      <table class="table">
+        <thead>
+          <tr>
 
-    <% for(let key of contribution) {%>
-    <tr>
-      <td><%= key.titles%></td>
-      <td><%= key.storytext%></td>
-      <td><%= key.contributiontext%></td>
-    </tr>
-    <%}%>
+            <th scope="col">contributions</th>
 
-      ​
+          </tr>
+        </thead>
+        <tbody>
+          <% for(let key of contribution) {%>
+      <tr>
+        <td><%= key.contributiontext%></td>
+
+      </tr>
+      <%}%>
+      </tbody>
+    </table> ​
   </div>
-
-  ​
+  <form action="/story/contribution" method="POST">
+  <input type="hidden" name="id" value=<%=contribution[0].id%>></input>
+      <input name="text" type="text"></input>
+      </form> ​
 </body>
 ​
 
