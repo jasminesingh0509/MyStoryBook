@@ -95,8 +95,8 @@ WHERE stories.id = $1
 ORDER BY contributions.order_by`,
       [story]
     )
-    .then(res => cb(res.rows))
-    .catch(err => console.log(err));
+    .then(res => cb(null, res.rows))
+    .catch(err => cb(err, null));
 };
 
 const addContributions = function(story_id, text, cb) {

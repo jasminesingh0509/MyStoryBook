@@ -65,6 +65,12 @@ app.use("/api/widgets", widgetsRoutes(db));
 const users = {};
 const stories = {};
 
+app.listen(PORT, () => {
+  console.log(`Example app listening on port ${PORT}`);
+});
+
+//----------------------------GET------------------------------
+
 app.get("/", (req, res) => {
   res.redirect("/story");
 });
@@ -80,10 +86,6 @@ app.get("/", (req, res) => {
 
 app.get(`/login/`, (req, res) => {
   res.redirect(`/story`);
-});
-
-app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`);
 });
 
 app.get("/story", (req, res) => {
@@ -119,16 +121,14 @@ app.get(`/story/completed`, (req, res) => {
 app.get(`/story/:id`, (req, res) => {
   console.log(req.params.id);
   getStory(req.params.id, (err, story) => {
-    console.log(story);
-
     if (err) {
       return res.render("error", { err });
     }
-    getStoryWithContributions(story, (err, contribution) => {
+    getStoryWithContributions(req.params.id, (err, contribution) => {
       if (err) {
         return res.render("error", { err });
       }
-      console.log(contribution);
+      console.log("THIS IS THE CONTRIBUTION>>>>>>>>>>>>>", contribution);
       res.render("story", { story });
     });
   });
@@ -159,6 +159,7 @@ app.get("/contribution", (req, res) => {
   res.render("contributions");
 });
 
+//-------------------------POST------------------------------------------
 //Add story here
 app.post(`/story`, (req, res) => {
   let { title, text } = req.body;
