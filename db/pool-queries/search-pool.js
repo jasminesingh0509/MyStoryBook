@@ -92,7 +92,7 @@ const getStoryWithContributions = function(story_id, cb) {
       `SELECT stories.id as id, stories.title as titles, stories.text as storytext, contributions.text as contributiontext, users.name as name
 From contributions
 Join users on users.id = user_id
-Join stories on stories.id = story_id
+RIGHT Join stories on stories.id = story_id
 WHERE stories.id = $1
 ORDER BY contributions.order_by`,
       [story_id]
@@ -145,10 +145,12 @@ const incomplete = function(cb) {
     .then(res => cb(res.rows));
 };
 
-const completeAStory = function(cb) {
+const completeAStory = function(id, cb) {
   pool
-    .query("UPDATE stories SET is_completed = true WHERE stories.id = 2;")
-    .then(res => cb(res.rows))
+    .query("UPDATE stories SET is_completed = true WHERE stories.id = $1;", [
+      id
+    ])
+    .then(res => cb(null, res.rows))
     .catch(err => cb(err));
 };
 

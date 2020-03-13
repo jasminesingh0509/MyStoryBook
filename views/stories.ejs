@@ -12,6 +12,10 @@
   <link href="https://fonts.googleapis.com/css?family=Bungee&display=swap" rel="stylesheet" />
   ​
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400i,700&display=swap" rel="stylesheet" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+
   ​
   <!-- App CSS -->
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
@@ -36,9 +40,12 @@
 <body>
   <nav class="navbar" id="logo">
     <!-- <h1> My Story Book </h1> -->
-    ​
+    ​<span class="avatar-container"> <img class="avatar" src="https://puu.sh/FjZ8h/9018270184.png">User: Jimmy Newtron
+    </span>
     <span id="compose">My Story Book <i class="far fa-laugh bounce"></i></span>
-    <h1>Read a Story!</h1>
+    <a class="redirect">
+      <h1 class="home">Reading is Fun!</h1>
+    </a>
   </nav>
   <header id="header">
   </header>
@@ -47,10 +54,11 @@
     <p class="story-here"> START YOUR STORY HERE !</p>
     <form action="/story" method="POST" class="story-title">
       <label>Title: </label>
-      <input type="text" name="title" />
+      <input class="textbox" type="text" name="title" />
       <label>Start your story:</label>
-      <input type="text" name="paragraph" />
-      <button type="ADD" class="btn btn-primary">ADD YOUR STORY </button>
+      <input class="textbox" type="text" name="paragraph" />
+      <button type="ADD" class="btn btn-primary"><strong>ADD YOUR STORY</strong>
+      </button>
 
   </div>
   </form>

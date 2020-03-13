@@ -15,6 +15,11 @@
   <link href="https://fonts.googleapis.com/css?family=Bungee&display=swap" rel="stylesheet" />
   ​
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400i,700&display=swap" rel="stylesheet" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+
   ​
   <!-- App CSS -->
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
@@ -43,61 +48,59 @@
   <!-- Top nav bar (fixed) -->
   <nav class="navbar" id="logo">
     <!-- <h1> My Story Book </h1> -->
-    ​
+    ​<span class="avatar-container"> <img class="avatar" src="https://puu.sh/FjZ8h/9018270184.png">User: Jimmy Newtron
+    </span>
     <span id="compose">My Story Book <i class="far fa-laugh bounce"></i></span>
-    <h1>Read a Story!</h1>
+    <a href="/stories" class="redirect">
+      <h1 class="home">HOME</h1>
+    </a>
   </nav>
   <header id="header">
   </header>
   ​
-  ​
-  <div class="mystories">
-    <p class="story-here"> START YOUR STORY HERE !</p>
-    <form action="/story" method="POST" class="story-title">
-      <label>Title: </label>
-      <input type="text" name="title" />
-      <label>Start your start:</label>
-      <input type="text" name="paragraph" />
-      <button type="ADD" class="btn btn-primary">ADD YOUR STORY </button>
-
-  </div>
-  </form>
-  ​
-  </div>
-  <div class="friendsstory">
+  <div class="friends-story">
     <div class="story-header">
-      <% if (contribution){%>
-      <h1>Title</h1>
-      <p><%=contribution[0].titles%></p>
-      <h1>Story</h1>
-      <p><%=contribution[0].storytext%></p>
-      <%}%>
+
+
     </div>
-      <table class="table">
-        <thead>
-          <tr>
+    <table class="table">
+      <thead>
+        <tr class="contribution-table">
+          <h1 class="title-text">Title</h1>
+          <p class="title-text"><%=contribution[0].titles%></p>
+          <h1 class="title-text">Story</h1>
+          <p class="story-text"><%=contribution[0].storytext%></p>
 
-            <th scope="col">Author</th>
-            <th scope="col">Contributions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <h1 class="cont-header">Author:</h1>
+        <% for(let key of contribution) {%>
+        <tr>
+          <td class="td"><%= key.contributiontext%></td>
 
-          </tr>
-        </thead>
-        <tbody>
-          <% for(let key of contribution) {%>
-      <tr>
-        <td><%= key.name%></td>
-        <td><%= key.contributiontext%></td>
+        </tr>
+        <tr>
+          <td>- Author: <%= key.name%></td>
+        </tr>
+        <%}%>
+        </tbody>
+      </table> ​
+    </div>
 
-      </tr>
-      <%}%>
-      </tbody>
-    </table> ​
-  </div>
-  <form action="/story/contribution" method="POST">
-  <input type="hidden" name="id" value=<%=contribution[0].id%>></input>
-      <input name="text" type="text"></input>
-      <button type="submit" class="btn btn-primary">ADD TO THE STORY </button> </form> ​
+    <footer class="foot">
+    <% if (story.is_completed === false ) {%>
+        <form action="/story/contribution" method="POST">
+          <input type="hidden" name="id" value=<%=contribution[0].id%>></input>
+          <input name="text" type="text"></input>
+          <button type="submit" class="btn btn-primary">ADD TO THE STORY </button> </form> ​
+        <form method="POST" action="/story/completed/<%= story.id%>"><button type="SUBMIT" class="markompleted">MARK
+            COMPLETED
+          </button></form>
+        <%}%>
+        <p class="in-progress"> <%= helper.truecheck(story.is_completed)%></p>
 
+        </footer>
 </body>
 ​
 

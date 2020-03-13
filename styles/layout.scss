@@ -9,6 +9,8 @@ body {
 
   h1 {
     color: #eee;
+    text-align: left;
+    padding-left: 189px;
   }
 
   .bg-secondary {
@@ -35,7 +37,7 @@ body {
   background-color: #2d82c1;
   height: 26vh;
   justify-content: center;
-  background-image: url(https://www.transparenttextures.com/patterns/arches.png);
+  background-image: url(https://www.transparenttextures.com/patterns/arches.png), ;
 
   p {
     align-items: center;
@@ -65,7 +67,7 @@ footer {
 
 .story-here {
   color: white;
-  font-family: bungee;
+  font-family: 'indie flower';
   display: flex;
   align-self: center;
   padding-top: 8vh;
@@ -76,13 +78,64 @@ button {
   border-radius: 23px;
   color: navy;
   background-color: lightsteelblue;
-  font-family: bungee;
+  font-family: 'indie flower', sans-serif;
+
 }
 
 .story-header {
   text-align: center;
-  font-family: fantasy;
+  font-family: 'Sniglet', cursive;
 
+}
 
+.avatar {
+  display: inherit;
+}
 
+.textbox {
+  border-radius: 44px;
+  margin-bottom: 15px;
+  padding: 8px
+}
+
+.table {
+  margin: 0 auto;
+}
+
+.mark-completed {
+  text-align: right;
+}
+
+.friends-story {
+  text-align: center;
+}
+
+.table {
+  margin: 0 auto;
+}
+
+.story-text {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.title-text {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.cont-header {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.foot {
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center
+}
+
+.in-progress {
+  float: left
 }

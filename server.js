@@ -143,41 +143,18 @@ app.get(`/story/:id`, (req, res) => {
       if (err) {
         return res.render("error", { err });
       }
-      function storiesForUser(id, database) {
-        let urlsdatabase = {};
-        for (let stories in database) {
-          if (database[stories].user_id === id) {
-            urlsdatabase[stories] = database[stories];
+      let helper = {
+        truecheck: function checkCompleted(x) {
+          if (Boolean(x) === true) {
+            return "Completed";
           }
+          return "in Progress";
         }
-        return urlsdatabase;
-      }
-      let userStory = storiesForUser(req.params.id, story);
-      res.render("story", { userStory, contribution });
+      };
+      res.render("story", { story, contribution, helper });
     });
   });
-  //res.send('testing 4');
 });
-
-// app.get(`/story/:id`, (req, res) => {
-//   read(req.params.id, (err, stories) => {
-//     if (err) {
-//       res.render("error", { err });
-//     }
-//     res.render("story", { stories });
-//   });
-//   //res.send('testing 4');
-// });
-
-// app.get(`/user/:id`, (req, res) => {
-//   getStoryByUserId(req.params.id, (err, stories) => {
-//     if (err) {
-//       return res.render("error", { err });
-//     }
-//     //console.log(`stories`, req.params.id);
-//     res.render(`stories`, { stories });
-//   });
-// });
 
 app.get("/contribution", (req, res) => {
   res.render("contributions");
@@ -187,11 +164,11 @@ app.get("/contribution", (req, res) => {
 //Add story here
 app.post(`/story`, (req, res) => {
   let { title, paragraph } = req.body;
-  addStory(title, paragraph, err => {
+  addStory(paragraph, title, err => {
     if (err) {
       return res.render("error", { err });
     }
-    res.redirect("stories");
+    res.redirect("/stories");
   });
 });
 
@@ -200,6 +177,7 @@ app.post("/story/completed/:id", (req, res) => {
     if (err) {
       return res.render("error", { err });
     }
+    res.redirect("/stories");
   });
 });
 
@@ -211,7 +189,7 @@ app.post(`/story/:id/delete`, (req, res) => {
       return res.render("error", { err });
     }
     //console.log(`stories`, req.params.id);
-    res.render(`stories`, { stories });
+    res.render(`/stories`, { stories });
   });
 });
 

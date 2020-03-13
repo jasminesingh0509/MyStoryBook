@@ -8,6 +8,11 @@
   align-items: center;
   justify-content: space-around;
   position: absolute;
+  top: 0;
+}
+
+#pick {
+  margin: 0;
 }
 
 #logo {
@@ -16,8 +21,8 @@
 
 #compose {
   font-family: 'Sniglet', cursive;
-  font-size: xx-large;
-  padding-top: 30px;
+  font-size: xxx-large;
+  padding-top: 4px;
 }
 
 @keyframes bounce {
@@ -54,4 +59,14 @@
   transform-origin: center bottom;
   transform: translate(0);
   animation-iteration-count: infinite;
+}
+
+.home:hover {
+  transform: scale(1.5);
+  /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+.home {
+  text-decoration: none !important;
+
 }
