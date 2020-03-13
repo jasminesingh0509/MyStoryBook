@@ -63,25 +63,24 @@
 
 
     </div>
-    <table class="table">
+    <table class="table-story-page">
       <thead>
         <tr class="contribution-table">
           <h1 class="title-text">Title</h1>
           <p class="title-text"><%=contribution[0].titles%></p>
-          <h1 class="title-text">Story</h1>
+          <h1 class="title-text">The story begins...</h1>
           <p class="story-text"><%=contribution[0].storytext%></p>
-
         </tr>
       </thead>
       <tbody>
-        <h1 class="cont-header">Author:</h1>
+        <h1 class="cont-header">And then...</h1>
         <% for(let key of contribution) {%>
         <tr>
-          <td class="td"><%= key.contributiontext%></td>
+          <td class="td-text"><%= key.contributiontext%></td>
+          <td class="td"> - <%= key.name%></td>
 
         </tr>
         <tr>
-          <td>- Author: <%= key.name%></td>
         </tr>
         <%}%>
         </tbody>
@@ -92,7 +91,7 @@
     <% if (story.is_completed === false ) {%>
         <form action="/story/contribution" method="POST">
           <input type="hidden" name="id" value=<%=contribution[0].id%>></input>
-          <input name="text" type="text"></input>
+          <input class="text-area-story" name="text" type="text"></input>
           <button type="submit" class="btn btn-primary">ADD TO THE STORY </button> </form> ​
         <form method="POST" action="/story/completed/<%= story.id%>"><button type="SUBMIT" class="markompleted">MARK
             COMPLETED

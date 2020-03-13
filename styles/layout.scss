@@ -76,9 +76,9 @@ footer {
 
 button {
   border-radius: 23px;
-  color: navy;
-  background-color: lightsteelblue;
-  font-family: 'indie flower', sans-serif;
+  color: whitesmoke;
+  background-color: orangered;
+  font-family: unset;
 
 }
 
@@ -122,14 +122,17 @@ button {
 .title-text {
   text-align: center;
   margin: 0 auto;
+  padding: 17px;
 }
 
 .cont-header {
   text-align: center;
   margin: 0 auto;
+  padding: 20px;
 }
 
 .foot {
+  border-radius: 10px;
   height: 60px;
   display: flex;
   flex-direction: row;
@@ -138,4 +141,20 @@ button {
 
 .in-progress {
   float: left
+}
+
+
+.table-story-page {
+  padding-right: 56px;
+  padding-left: 56px;
+}
+
+.td-text {
+  padding: 25px;
+  font-style: italic;
+}
+
+.text-area-story {
+  border-radius: 10px;
+  border: solid 1px cadetblue;
 }
