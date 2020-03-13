@@ -37,17 +37,6 @@ const getStory = (id, cb) => {
     .catch(err => cb(err));
 };
 
-// const edit = (id, stories, cb) => {
-//   const sql = "UPDATE stories SET text = $2 WHERE id = $1;";
-//   const args = [id, stories];
-//   pool
-//     .query(sql, args)
-//     .then(() => {
-//       cb(null, "story updated succesfully");
-//     })
-//     .catch(err => cb(err));
-// };
-
 const getStoryByUserId = function(id, cb) {
   pool
     .query(
@@ -73,17 +62,6 @@ const addStory = function(title, text, cb) {
     })
     .catch(err => cb(err, null));
 };
-
-// addStory({1,"hey there", 'TITLES STORY', 'www.google.ca'});
-
-// const addToText = function(text, cb) {
-//   return pool.query(
-//     "INSERT INTO stories (text) VALUES ($1) WHERE user_id = 1;",
-//     [text]
-//   );
-// };
-
-// addToText("hey heyeh eyeyey", console.log);
 
 const getStoryWithContributions = function(story_id, cb) {
   // in object we will have to retrive the object keys for each text

@@ -194,7 +194,6 @@ app.post(`/story/:id/delete`, (req, res) => {
 });
 
 app.post("/story/contribution", (req, res) => {
-  console.log(">>>>>>>>>>>>>>>>>>>>>>>>>", req.body);
   addContributions(req.body.id, req.body.text, (err, data) => {
     if (err) {
       return res.render("error", { err });
