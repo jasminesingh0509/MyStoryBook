@@ -1,4 +1,4 @@
-A story creator web app for children. Users can start a story or contribute to an exisiting one!
+A story creator web app for children. Users can start a story or contribute to an existing one!
 
 ## Getting Started
 
