@@ -23,14 +23,6 @@ $(document).ready(function() {
   };
   createStoryElement();
 
-  // const display = $(".upvote");
-  // $(".contribution")
-  //   .find("#textArea")
-  //   .one("click", function(event) {
-  //     const count = $(this).val().length;
-  //     display.text(count);
-  //     console.log(count);
-  //   });
 
   let count = 0;
 
